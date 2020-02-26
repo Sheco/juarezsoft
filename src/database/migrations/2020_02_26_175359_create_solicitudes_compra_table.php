@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProveedorSolicitudesCompraTable extends Migration
+class CreateSolicitudesCompraTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateProveedorSolicitudesCompraTable extends Migration
      */
     public function up()
     {
-        Schema::create('proveedor_solicitudes_compra', function (Blueprint $table) {
+        Schema::create('solicitudes_compra', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('proveedor_id');
             $table->unsignedBigInteger('producto_id');
             $table->unsignedInteger("cantidad");
+            $table->enum("status", ['nueva', 'pagada', 'entregada', 'cancelada']);
             $table->dateTime('fecha_pago');
             $table->dateTime('entregado');
             $table->timestamps();

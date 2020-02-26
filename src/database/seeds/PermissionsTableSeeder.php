@@ -14,6 +14,10 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         Role::create([
+            'name'=>'administrador',
+            'sueldo'=>0
+        ]);
+        Role::create([
             'name'=>'gerente',
             'sueldo'=>35000
         ]);
