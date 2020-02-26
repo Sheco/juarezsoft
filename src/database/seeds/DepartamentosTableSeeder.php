@@ -12,14 +12,14 @@ class DepartamentosTableSeeder extends Seeder
      */
     public function run()
     {
-        new Departamento(['nombre'=>'Caballeros']);
-        new Departamento(['nombre'=>'Damas']);
-        new Departamento(['nombre'=>'Niños']);
-        new Departamento(['nombre'=>'Bebés']);
-        new Departamento(['nombre'=>'Júnior']);
-        new Departamento(['nombre'=>'Deportes']);
-        new Departamento(['nombre'=>'Relojería y joyería']);
-        new Departamento(['nombre'=>'Videojuegos']);
-        new Departamento(['nombre'=>'Libros, películas y música']);
+        Departamento::create(['nombre'=>'Caballeros']);
+        Departamento::create(['nombre'=>'Damas']);
+        Departamento::create(['nombre'=>'Niños']);
+        Departamento::create(['nombre'=>'Bebés']);
+        Departamento::create(['nombre'=>'Júnior']);
+        Departamento::create(['nombre'=>'Deportes']);
+        Departamento::create(['nombre'=>'Relojería y joyería']);
+        Departamento::create(['nombre'=>'Videojuegos']);
+        Departamento::create(['nombre'=>'Libros, películas y música']);
     }
 }

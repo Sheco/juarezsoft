@@ -18,7 +18,7 @@ class CreateProductosTable extends Migration
             $table->string("nombre");
             $table->string("codigo");
             $table->decimal("precio", 9, 2);
-            $table->integer("stock");
+            $table->integer("stock")->default(0);
             $table->unsignedBigInteger("departamento_id");
             $table->timestamps();
            
