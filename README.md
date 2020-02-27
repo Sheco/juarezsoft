@@ -55,8 +55,10 @@ Caracteristicas tecnicas:
 - ventas
     - id
     - usr_id
-    - producto_id
     - fecha
+
+- venta_productos
+    - producto_id
     - cantidad
 
 # Procesos
