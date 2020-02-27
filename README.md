@@ -3,9 +3,9 @@
 ## Planteamiento resumido
 El Ingeniero tiene varias tiendas, distribuidas a lo largo de México.
 
-Caracteristicas tecnicas:
+## Características técnicas:
 - Cada tienda tiene que poder operar de manera local, sin depender de un enlace a Internet.
-- El dueño podra conectarse por VPN, para tener una acceso seguro al sistema.
+- El dueño podrá conectarse por VPN, para tener una acceso seguro al sistema.
 
 ## Estructura de la base de datos
 
@@ -65,28 +65,28 @@ Caracteristicas tecnicas:
 
 Para poder usar el sistema es obligatorio iniciar sesión con usuario y clave.
 
-Por defecto, se incluirá un usuario administrador con el cual se podran agregar
-mas usuarios y poblar los catalogos de la base de datos.
+Por defecto, se incluirá un usuario administrador con el cual se podrán agregar
+más usuarios y poblar los catalogos de la base de datos.
 
 ## Pantalla principal
 
 Al iniciar sesión, se muestra la interfaz de punto de venta, que incluye un 
-campo de texto para capturar el codigo del producto.
+campo de texto para capturar el código del producto.
 
 Debajo de este campo, se mostrará una lista de los productos que se han
 agregado a la sesión.
 
-A un lado de esta lista, se mostrara el total a cobrar, así como un boton
-para guardar la venta y un boton para cancelar la venta.
+A un lado de esta lista, se mostrará el total a cobrar, así como un boton
+para guardar la venta y un botón para cancelar la venta.
 
-## Modulos de administración
+## Módulos de administración
 
 Si el usuario actual tiene permisos de administrador, en el menu superior
-tendrá bajo un menú contextual, una lista de modulos administrativos.
+tendrá bajo un menú contextual, una lista de módulos administrativos.
 
-Se pueden encontrar los siguientes modulos administrativos:
+Se pueden encontrar los siguientes módulos administrativos:
 
-Modulos de gestion de catalogos:
+Módulos de gestion de catalogos:
 - Roles
 - Usuarios
 - Departamentos
@@ -105,25 +105,25 @@ Reportes:
 - Inventario
 - Cuentas por pagar
 
-# Requerimentos e instalación
+# Requerimientos e instalación
 
-Este software esta escrito en PHP usando el framework Laravel, por lo cual puede ser instalado en cualquier equipo que tenga ```PHP 7.2``` o superior, favor de revisar los [requerimentos del Framework](https://laravel.com/docs/6.x/installation)
+Este software está escrito en PHP usando el framework Laravel, por lo cual puede ser instalado en cualquier equipo que tenga ```PHP 7.2``` o superior, favor de revisar los [requerimentos del Framework](https://laravel.com/docs/6.x/installation)
 
-La aplicación es compatible con cualquiera de las bases de datos populares, como MySQL, PostgreSQL y sqlite, para efectos practicos y de demostración, se usara sqlite, para un entorno de produccion se recomienda una base de datos mas robusta, como PostgreSQL.
+La aplicación es compatible con cualquiera de las bases de datos populares, como MySQL, PostgreSQL y sqlite, para efectos prácticos y de demostración, se usara sqlite, para un entorno de producción se recomienda una base de datos más robusta, como PostgreSQL.
 
-Para instalar las depdenencias de PHP usaremos [composer](http://getcomposer.org).
+Para instalar las depenencias de PHP usarémos [composer](http://getcomposer.org).
 
-Para compilar recursos estaticos (css), se necesita tener instalado ```NodeJS 10.x``` o superior, así como tambien su compañero ```npm```.
+Para compilar recursos estáticos (css), se necesita tener instalado ```NodeJS 10.x``` o superior, así como también su compañero ```npm```.
 
 Las instrucciones a continuación asumen un entorno *nix, como Linux o MacOS, para preparar la aplicación.
 
-Primero necesitamos clonar el repositorio con el codigo fuente.
+Primero necesitamos clonar el repositorio con el código fuente.
 ```
 $ git clone https://github.com/Sheco/juarezsoft
 ```
 
 Todo lo que sigue, lo tenemos que ejecutar dentro del directorio ```src/```.
-A continuación, tenemos que instalar las dependencias y compilar los recursos estaticos:
+A continuación, tenemos que instalar las dependencias y compilar los recursos estáticos:
 
 ```
 $ composer install
@@ -147,3 +147,11 @@ $ php artisan db:seed
 ```
 
 Esto genero un usuario predeterminado, ```admin@localhost``` con contraseña ```juarez123```, es importante cambiar la contraseña lo antes posible.
+
+Para acceder la aplicación, se debe configurar el webserver (Apache/Nginx) para que la raíz de documentos para esta app sea el directorio ```src/public/```, para efectos de prueba, se puede lanzar un servidor web temporal usando:
+
+```
+$ php artisan serve
+```
+
+Dependiendo de cómo se haya publicado la aplicación web, ahora ya podremos entrar a la dirección apropiada.
