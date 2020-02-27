@@ -61,7 +61,42 @@ Caracteristicas tecnicas:
     - producto_id
     - cantidad
 
-# Procesos
+# Tareas
+
+- Migraciónes de la estructura de la base de datos
+- Poblar la base de datos con los catalogos estaticos
+    - Usuarios
+    - Departamentos
+    - Productos
+    - Proveedores (y los productos que proveen)
+- Script para simular el proceso de solicitudes de compra, para hacer stock
+    - API de solicitudes de compra
+        - Funcion que reciba los siguientes argumentos
+            - Proveedor
+            - Producto
+            - Cantidad
+        - Funcion para marcar como pagada una solicitud de compra
+        - Funcion para marcar como entregada una solicitud de compra
+- Script para simular ventas aleatorias
+    - API de ventas
+        - Una funcion que recibe
+            - Vendedor
+            - Lista de productos y cantidad
+    - Objetivos
+        - Semanal $750,000  por dia
+        - Fines de semana $2,500,000 por día
+        - Ventas especiales (un dia al mes) $1,750,00.00
+- Reporte de Ventas diarias generales
+- Reporte de Ventas diarias por producto
+- Reporte de Ventas por empleado
+- Reporte de Nomina
+- Reporte de Inventario
+- Reporte de Cuentas por pagar
+- Interfaz de captura de catalogos estaticos
+- Interfaz de punto de venta
+- Facturación
+
+# Interfaz de usuario
 
 ## Inicio de sesión
 
