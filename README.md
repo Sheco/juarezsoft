@@ -104,3 +104,46 @@ Reportes:
 - Nomina
 - Inventario
 - Cuentas por pagar
+
+# Requerimentos e instalación
+
+Este software esta escrito en PHP usando el framework Laravel, por lo cual puede ser instalado en cualquier equipo que tenga ```PHP 7.2``` o superior, favor de revisar los [requerimentos del Framework](https://laravel.com/docs/6.x/installation)
+
+La aplicación es compatible con cualquiera de las bases de datos populares, como MySQL, PostgreSQL y sqlite, para efectos practicos y de demostración, se usara sqlite, para un entorno de produccion se recomienda una base de datos mas robusta, como PostgreSQL.
+
+Para instalar las depdenencias de PHP usaremos [composer](http://getcomposer.org).
+
+Para compilar recursos estaticos (css), se necesita tener instalado ```NodeJS 10.x``` o superior, así como tambien su compañero ```npm```.
+
+Las instrucciones a continuación asumen un entorno *nix, como Linux o MacOS, para preparar la aplicación.
+
+Primero necesitamos clonar el repositorio con el codigo fuente.
+```
+$ git clone https://github.com/Sheco/juarezsoft
+```
+
+Todo lo que sigue, lo tenemos que ejecutar dentro del directorio ```src/```.
+A continuación, tenemos que instalar las dependencias y compilar los recursos estaticos:
+
+```
+$ composer install
+$ npm install
+$ npm run production
+```
+
+Luego es necesario preparar la configuración.
+
+```
+$ cp .env.sample .env
+$ php artisan key:generate
+$ touch storage/database.sqlite
+```
+
+Ahora estamos listos para preparar el contenido de la base de datos:
+
+```
+$ php artisan migrate
+$ php artisan db:seed
+```
+
+Esto genero un usuario predeterminado, ```admin@localhost``` con contraseña ```juarez123```, es importante cambiar la contraseña lo antes posible.
