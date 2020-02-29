@@ -12,4 +12,11 @@ class Producto extends Model
     public function departamento() {
         return $this->belongsTo('App\Departamento');
     }
+
+    public function proveedores() {
+        return $this->belongsToMany('App\Proveedor', 'proveedor_productos')
+                    ->withPivot([
+                        'precio'
+                    ]);
+    }
 }

@@ -15,12 +15,15 @@ class CreateProveedorProductosTable extends Migration
     {
         Schema::create('proveedor_productos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('proveedor_id');
             $table->unsignedBigInteger("producto_id");
             $table->decimal("precio", 9, 2);
             $table->timestamps();
 
             $table->foreign("producto_id")
-                ->references('id')->on('productos');
+                  ->references('id')->on('productos');
+            $table->foreign("proveedor_id")
+                  ->references('id')->on('proveedores');
         });
     }
 
