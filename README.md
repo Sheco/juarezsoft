@@ -136,12 +136,25 @@ Dependiendo de cómo se haya publicado la aplicación web, ahora ya podremos ent
         - Semanal $750,000  por dia
         - Fines de semana $2,500,000 por día
         - Ventas especiales (un dia al mes) $1,750,00.00
-- Reporte de Ventas diarias generales
-- Reporte de Ventas diarias por producto
-- Reporte de Ventas por empleado
-- Reporte de Nomina
-- Reporte de Inventario
+- Reporte de Ventas diarias generales (agregado por mes)
+    - Fecha
+    - Total
+- Reporte de Ventas diarias por producto (agregado de día)
+    - Producto
+    - cantidad vendida
+    - promedio de cantidad vendida en la ultima semana
+    - Stock disponible
+    - Estimado de dias que durará el stock
+- Reporte de Ventas por empleado (agregado por mes)
+    - Empleado
+    - Importe vendido
+    - Bono de venta
+- Reporte de Nomina (agregado por mes)
+    - Empleado
+    - Sueldo a pagar (incluyendo bonos)
 - Reporte de Cuentas por pagar
+    - Proveedor
+    - Saldo
 - Interfaz de captura de catalogos estaticos
 - Interfaz de punto de venta
 - Facturación
