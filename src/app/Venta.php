@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +29,7 @@ class Venta extends Model
         return DB::transaction(function() use ($user, $productos) {
             $venta = new Venta;
             $venta->user_id = $user->id;
+            $venta->fecha = Carbon::now();
             $venta->save();
 
             foreach($productos as $producto) {
