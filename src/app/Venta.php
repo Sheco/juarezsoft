@@ -26,6 +26,8 @@ class Venta extends Model
      *    ]
      * */
     public static function crear(User $user, array $productos = []) {
+        // TODO: agregar permisos/privilegios
+        //  El usuario $user puede crear ventas?
         return DB::transaction(function() use ($user, $productos) {
             $venta = new Venta;
             $venta->user_id = $user->id;
