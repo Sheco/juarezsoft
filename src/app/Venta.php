@@ -29,7 +29,8 @@ class Venta extends Model
         return DB::transaction(function() use ($user, $productos) {
             $venta = new Venta;
             $venta->user_id = $user->id;
-            $venta->fecha = Carbon::now();
+            $venta->fecha_hora = Carbon::now();
+            $venta->fecha = $venta->fecha_hora->format('Y-m-d');
             $venta->save();
 
             foreach($productos as $producto) {
@@ -82,7 +83,8 @@ class Venta extends Model
             }
             echo "Total de la operacion: $". number_format($total) ."\n";
             $venta = Venta::crear($usuario, $venta_productos);
-            $venta->fecha = $fecha;
+            $venta->fecha_hora = $fecha;
+            $venta->fecha = $fecha->format('Y-m-d');
             $venta->save();
             return [ $venta, $total ];
         };
