@@ -62,7 +62,7 @@ class Venta extends Model
         // y una cantidad aleatoria entre 1 y 3, hasta que la venta 
         // tenga un total de al menos $1000
         $productos = Producto::all();
-        $usuarios = User::all();
+        $usuarios = User::role('vendedor')->get();
             
         $ventaAleatoria = function($fecha, $compraMinima) 
             use ($productos, $usuarios) {
