@@ -9,7 +9,7 @@ class Proveedor extends Model
     protected $table = "proveedores";
 
     protected function productos() {
-        return $this->belongsToMany('App\Productos', 'proveedor_productos')
+        return $this->belongsToMany('App\Producto', 'proveedor_productos')
                     ->withPivot([
                         'precio'
                     ]);
