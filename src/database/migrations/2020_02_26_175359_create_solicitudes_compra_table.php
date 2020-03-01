@@ -19,8 +19,8 @@ class CreateSolicitudesCompraTable extends Migration
             $table->unsignedBigInteger('producto_id');
             $table->unsignedInteger("cantidad");
             $table->enum("status", ['nueva', 'pagada', 'entregada', 'cancelada']);
-            $table->dateTime('fecha_pago');
-            $table->dateTime('entregado');
+            $table->dateTime('fecha_pago')->nullable();
+            $table->dateTime('fecha_entregada')->nullable();
             $table->timestamps();
         });
     }

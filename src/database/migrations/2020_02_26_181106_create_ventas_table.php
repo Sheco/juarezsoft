@@ -15,7 +15,7 @@ class CreateVentasTable extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('usr_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
