@@ -77,13 +77,17 @@ class Venta extends Model
 
             echo "Inicia compra..\n";
             while($total<$compraMinima) {
+                echo "Vendiendo $cantidad {$producto->nombre}: $". 
+                    ($cantidad*$producto->precio)."\n";
+
                 $producto = $productos->shuffle()->slice(0, 1)->first();
                 $cantidad = rand(1, 3);
                 $total += $producto->precio * $cantidad;
-                echo "Vendiendo $cantidad {$producto->nombre}, por ". ($cantidad*$producto->precio)."\n";
                 $venta_productos[] = [ $producto->id, $cantidad ];    
             }
+
             echo "Total de la operacion: $". number_format($total) ."\n";
+
             $venta = Venta::crear($usuario, $venta_productos);
             $venta->fecha_hora = $fecha;
             $venta->fecha = $fecha->format('Y-m-d');
