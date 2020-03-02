@@ -48,12 +48,14 @@ class UsersTableSeeder extends Seeder
             'name'=>'Diego Luna',
             'email'=>'dlnua@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>60,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Andres Bustamante',
             'email'=>'abustamante@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>30,
         ]);
         $user->assignRole('vendedor');
 
@@ -61,36 +63,42 @@ class UsersTableSeeder extends Seeder
             'name'=>'Will Smith',
             'email'=>'wsmith@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>50,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Scarlett Johansson',
             'email'=>'sjohansson@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>30,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Mark Zuckerberg',
             'email'=>'mzuckerberg@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>10,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Salma Hayek',
             'email'=>'shayek@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>50,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Leonardo Da Vinci',
             'email'=>'lvinci@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>70,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Donald Trump',
             'email'=>'dtrump@localhost',
             'password'=>'xxx'
+            'frecuenciaVentas'=>5,
         ]);
         $user->assignRole('vendedor');
 
