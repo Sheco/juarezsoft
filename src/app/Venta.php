@@ -65,24 +65,43 @@ class Venta extends Model
         // tenga un total de al menos $1000
         $productos = Producto::all();
         $usuarios = User::role('vendedor')->get();
+
+        $objetoAleatorio = function($lista, $nombre, $frecuencia) {
+            $random = rand(0, 100);
+            $lista = $lista->shuffle();
+            do {
+                $objeto = $lista->shift();
+                echo "Seleccionando {$objeto->$nombre} si {$objeto->$frecuencia} >= $random\n";
+            } while($objeto->$frecuencia < $random);
+            return $objeto;
+        };
+
+        $obtenerUsuario = function() use ($objetoAleatorio, $usuarios) {
+            return $objetoAleatorio($usuarios, 'name', 'frecuenciaVentas');
+        };
+
+        $obtenerProducto = function() use ($objetoAleatorio, $productos) {
+            return $objetoAleatorio($productos, 'nombre', 'frecuenciaCompras');
+        };
             
         $ventaAleatoria = function($fecha, $compraMinima) 
-            use ($productos, $usuarios) {
+            use ($obtenerProducto, $obtenerUsuario) {
             $fecha = (new Carbon($fecha))
                 ->add(rand(0, 12*60*60), 'seconds');
-            $usuario = $usuarios->shuffle()->slice(0, 1)->first();
+            $usuario = $obtenerUsuario();
 
             $total = 0;
             $venta_productos = [];
 
             echo "Inicia compra..\n";
             while($total<$compraMinima) {
+                $producto = $obtenerProducto();
+                $cantidad = rand(1, 3);
+                $total += $producto->precio * $cantidad;
+
                 echo "Vendiendo $cantidad {$producto->nombre}: $". 
                     ($cantidad*$producto->precio)."\n";
 
-                $producto = $productos->shuffle()->slice(0, 1)->first();
-                $cantidad = rand(1, 3);
-                $total += $producto->precio * $cantidad;
                 $venta_productos[] = [ $producto->id, $cantidad ];    
             }
 
