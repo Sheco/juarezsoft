@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name'=>'Administrator',
             'email'=>'admin@localhost',
-            'password'=>Hash::make('juarez123')
+            'password'=>Hash::make('juarez123'),
         ]);
 
         $user->assignRole('administrador');
@@ -47,14 +47,15 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name'=>'Diego Luna',
             'email'=>'dlnua@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>60,
         ]);
         $user->assignRole('vendedor');
+
         $user = User::create([
             'name'=>'Andres Bustamante',
             'email'=>'abustamante@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>30,
         ]);
         $user->assignRole('vendedor');
@@ -62,42 +63,42 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name'=>'Will Smith',
             'email'=>'wsmith@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>50,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Scarlett Johansson',
             'email'=>'sjohansson@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>30,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Mark Zuckerberg',
             'email'=>'mzuckerberg@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>10,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Salma Hayek',
             'email'=>'shayek@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>50,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Leonardo Da Vinci',
             'email'=>'lvinci@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>70,
         ]);
         $user->assignRole('vendedor');
         $user = User::create([
             'name'=>'Donald Trump',
             'email'=>'dtrump@localhost',
-            'password'=>'xxx'
+            'password'=>Hash::make('vendedor1'),
             'frecuenciaVentas'=>5,
         ]);
         $user->assignRole('vendedor');
