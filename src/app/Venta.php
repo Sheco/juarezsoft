@@ -56,7 +56,7 @@ class Venta extends Model
         }, 0); 
     }
 
-    public static function ventasAleatoriasDelDia($fecha, $ventaTotal, $margen=0) {
+    public static function ventasAleatoriasDelDia($fecha, $ventaTotal, $porcentajeMargen=0) {
         // crear una venta aleatoria.
         // Generar una hora aleatoria entre 9:00 y 7:00pm
         // Obtener un usuario aleatorio
@@ -93,10 +93,11 @@ class Venta extends Model
 
         // generar ventas hasta llegar al objetivo
         return DB::transaction(function() 
-            use ($fecha, $ventaTotal, $ventaAleatoria, $margen) {
+            use ($fecha, $ventaTotal, $ventaAleatoria, $porcentajeMargen) {
             $total = 0;
             $compraMinima = 1000;
             $ventas = [];
+            $margen = $ventaTotal*$porcentajeMargen/100;
             $ventaTotal += rand(0, $margen*2)-$margen;
 
             while($total<$ventaTotal) {
