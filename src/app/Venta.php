@@ -36,16 +36,23 @@ class Venta extends Model
             $venta->fecha = $venta->fecha_hora->format('Y-m-d');
             $venta->save();
 
+            $total = 0;
             foreach($productos as $producto) {
                 list($id, $cantidad) = $producto;
                 $producto = Producto::find($id);
                 $producto->stock -= $cantidad;
                 $producto->save();
 
+                $total += $producto->precio*$cantidad;
+
                 $venta->productos()->attach($producto, [
                     'cantidad' => $cantidad
                 ]);
             }
+            
+            $venta->total = $total;
+            $venta->save();
+
             return $venta;
         });
     }
@@ -105,13 +112,21 @@ class Venta extends Model
                 $venta->fecha = $fecha->format('Y-m-d');
                 $venta->save();
 
+                $total = 0;
                 foreach($productos as $producto) {
                     list($id, $cantidad) = $producto;
+
+                    $producto = Producto::find($id);
+                    $total += $producto->precio*$cantidad;
 
                     $venta->productos()->attach($producto, [
                         'cantidad' => $cantidad
                     ]);
                 }
+
+                $venta->total = $total;
+                $venta->save();
+
                 return $venta;
             });
         };
