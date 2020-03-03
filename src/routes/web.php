@@ -21,3 +21,6 @@ Route::get('/ventas/diarias', 'VentasController@diarias')
 Route::get('/ventas/productos', 'VentasController@productos')
     ->name('ventas.productos');
 
+Route::get('/ventas/vendedores', 'VentasController@vendedores')
+    ->name('ventas.vendedores');
+

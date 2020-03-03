@@ -27,4 +27,14 @@ class VentasController extends Controller
             compact('fecha_inicio', 'fecha_final', 'orden', 'datos')
         );
     }
+
+    function vendedores(Request $request) {
+        $fecha_inicio = $request->input('fecha_inicio');
+        $fecha_final = $request->input('fecha_final');
+
+        $datos = Venta::reporteVendedores($fecha_inicio, $fecha_final);
+        return view('ventas.vendedores', compact(
+            'fecha_inicio', 'fecha_final', 'datos'
+        ));
+    }
 }

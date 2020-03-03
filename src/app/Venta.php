@@ -106,6 +106,25 @@ class Venta extends Model
         return $query->get();
     }
 
+    public static function reporteVendedores($fecha) {
+        if(!$fecha) return collect([]);
+
+        $fecha = new Carbon($fecha);
+        $inicio = $fecha->clone()->startOfMonth()->format('Y-m-d');
+        $fin = $fecha->clone()->endOfMonth()->format('Y-m-d');
+
+        return DB::table('ventas')
+            ->join('users', 'users.id', '=', 'ventas.user_id')
+            ->select('users.name as nombre', 
+                DB::raw('count(*) as cantidad'),
+                DB::raw('sum(total) as total')
+            )
+            ->groupBy('users.name')
+            ->orderByRaw('sum(total) desc')
+            ->whereBetween('fecha', [ $inicio, $fin])
+            ->get();
+    }
+
     public static function ventasAleatoriasDelDia($fecha, $ventaTotal, $porcentajeMargen=0) {
         // crear una venta aleatoria.
         // Generar una hora aleatoria entre 9:00 y 7:00pm
@@ -206,6 +225,7 @@ class Venta extends Model
             }
 
             $venta = $vender($usuario, $venta_productos, $fecha);
+            echo "Venta: $venta->id\n";
             return [ $venta, $total ];
         };
 

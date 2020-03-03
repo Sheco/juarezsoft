@@ -36,6 +36,11 @@
                                 Ventas por producto
                             </a>
                         </li>
+                        <li class="nav-item list-group-item">
+                            <a class="nav-link" href="{{ route('ventas.vendedores') }}">
+                                Ventas por vendedor
+                            </a>
+                        </li>
                     </div>
                 </div>
             </div>
