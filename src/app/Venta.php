@@ -251,7 +251,7 @@ class Venta extends Model
         });
     }
 
-    static function poblaMesAleatoriamente($fecha) {
+    static function poblaMesAleatoriamente($fecha, $margen) {
         $fecha = new Carbon($fecha);
         $inicio = $fecha->clone()->startOfMonth();
         $fin = $fecha->clone()->endOfMonth();
@@ -268,7 +268,7 @@ class Venta extends Model
                 ($dia->format('Y-m-d')==$especial->format('Y-m-d')? 
                     1750000:
                     750000);
-            Venta::ventasAleatoriasDelDia($dia->format('Y-m-d'), $ingreso, 20);
+            Venta::ventasAleatoriasDelDia($dia->format('Y-m-d'), $ingreso, $margen);
         }
     }
 }
