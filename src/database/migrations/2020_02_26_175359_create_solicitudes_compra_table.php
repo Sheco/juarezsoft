@@ -22,6 +22,9 @@ class CreateSolicitudesCompraTable extends Migration
             $table->dateTime('fecha_pago')->nullable();
             $table->dateTime('fecha_entregada')->nullable();
             $table->timestamps();
+
+            $table->index('proveedor_id');
+            $table->index('producto_id');
         });
     }
 

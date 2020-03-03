@@ -24,6 +24,9 @@ class CreateProveedorProductosTable extends Migration
                   ->references('id')->on('productos');
             $table->foreign("proveedor_id")
                   ->references('id')->on('proveedores');
+
+            $table->index('proveedor_id');
+            $table->index('producto_id');
         });
     }
 

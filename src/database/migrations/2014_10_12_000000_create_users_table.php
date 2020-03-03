@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('frecuenciaVentas')->default(0);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->index('email');
         });
     }
 

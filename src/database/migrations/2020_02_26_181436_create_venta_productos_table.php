@@ -25,6 +25,7 @@ class CreateVentaProductosTable extends Migration
                   ->onDelete('cascade');
             $table->foreign('producto_id')
                   ->references('id')->on('productos');
+            $table->index('venta_id');
         });
     }
 

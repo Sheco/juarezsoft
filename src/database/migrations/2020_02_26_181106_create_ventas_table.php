@@ -21,6 +21,7 @@ class CreateVentasTable extends Migration
             $table->timestamps();
 
             $table->index('fecha');
+            $table->index('user_id');
         });
     }
 
