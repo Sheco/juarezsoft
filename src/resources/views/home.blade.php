@@ -15,6 +15,20 @@
                     @endif
 
                     You are logged in!
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Ventas</div>
+                <div class="card-body">
+                    <div class="nav flex-column list-group">
+                        <li class="nav-item list-group-item">
+                            <a class="nav-link" href="{{ route('ventas.productos') }}">
+                                Ventas por producto
+                            </a>
+                        </li>
+                    </div>
                 </div>
             </div>
         </div>

@@ -64,6 +64,32 @@ class Venta extends Model
         }, 0); 
     }
 
+    /* reportes */
+
+    public static function reporteProductos($fecha_inicio, 
+        $fecha_final,
+        $orden) {
+        if(!$fecha_inicio || !$fecha_final) 
+            return collect([]);
+
+        if(!$orden) $orden = "total";
+
+        $query = DB::table('venta_productos')
+            ->join('productos', 'productos.id', '=', 'venta_productos.producto_id')
+            ->join('ventas', 'ventas.id', '=', 'venta_productos.venta_id')
+            ->select('ventas.fecha', 
+                'productos.nombre', 
+                DB::raw('sum(productos.precio*cantidad) as total'))
+            ->groupBy('fecha', 'productos.id')
+            ->whereBetween('fecha', [ $fecha_inicio, $fecha_final ]);
+
+        foreach(explode(',', $orden) as $o) {
+            $query->orderBy($o, 'desc');
+        }
+        
+        return $query->get();
+    }
+
     public static function ventasAleatoriasDelDia($fecha, $ventaTotal, $porcentajeMargen=0) {
         // crear una venta aleatoria.
         // Generar una hora aleatoria entre 9:00 y 7:00pm

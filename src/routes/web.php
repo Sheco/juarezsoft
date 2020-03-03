@@ -14,3 +14,7 @@
 Auth::routes(['register'=>false]);
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/ventas/productos', 'VentasController@productos')
+    ->name('ventas.productos');
+
