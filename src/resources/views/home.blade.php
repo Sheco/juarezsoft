@@ -24,6 +24,11 @@
                 <div class="card-body">
                     <div class="nav flex-column list-group">
                         <li class="nav-item list-group-item">
+                            <a class="nav-link" href="{{ route('ventas.diarias') }}">
+                                Ventas diarias
+                            </a>
+                        </li>
+                        <li class="nav-item list-group-item">
                             <a class="nav-link" href="{{ route('ventas.productos') }}">
                                 Ventas por producto
                             </a>

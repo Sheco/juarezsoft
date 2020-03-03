@@ -66,6 +66,21 @@ class Venta extends Model
 
     /* reportes */
 
+    public static function reporteDiario($fecha_inicio,
+        $fecha_final) {
+
+        if(!$fecha_inicio || !$fecha_final)
+            return collect([]);
+
+        return DB::table('ventas')
+            ->select('fecha', 
+                DB::raw('sum(total) as total'))
+            ->whereBetween('fecha', [ $fecha_inicio, $fecha_final ])
+            ->groupBy('fecha')
+            ->orderBy('fecha')
+            ->get();
+    }
+
     public static function reporteProductos($fecha_inicio, 
         $fecha_final,
         $orden) {
