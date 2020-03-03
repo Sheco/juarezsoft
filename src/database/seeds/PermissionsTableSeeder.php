@@ -13,10 +13,13 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
+        $role = Role::create([
             'name'=>'administrador',
             'sueldo'=>0
-        ]);
+          ]);
+        $verReportes = Permission::create(['name'=>'ver reportes']);
+        $role->givePermissionTo($verReportes);
+
         Role::create([
             'name'=>'gerente',
             'sueldo'=>35000
@@ -29,9 +32,11 @@ class PermissionsTableSeeder extends Seeder
             'name'=>'jefe de piso',
             'sueldo'=>15000
         ]);
-        Role::create([
+        $role = Role::create([
             'name'=>'vendedor',
             'sueldo'=>5000
-        ]);
+          ]);
+        $vender = Permission::create(['name'=>'vender']);
+        $role->givePermissionTo($vender);
     }
 }

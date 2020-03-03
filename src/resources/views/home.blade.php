@@ -26,6 +26,7 @@
                 <div class="card-header">Ventas</div>
                 <div class="card-body">
                     <div class="nav flex-column list-group">
+                        @can('ver reportes')
                         <li class="nav-item list-group-item">
                             <a class="nav-link" href="{{ route('ventas.diarias') }}">
                                 Ventas diarias
@@ -41,6 +42,7 @@
                                 Ventas por vendedor
                             </a>
                         </li>
+                        @endcan
                     </div>
                 </div>
             </div>

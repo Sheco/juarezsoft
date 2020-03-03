@@ -15,12 +15,14 @@ Auth::routes(['register'=>false]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/ventas/diarias', 'VentasController@diarias')
-    ->name('ventas.diarias');
 
-Route::get('/ventas/productos', 'VentasController@productos')
-    ->name('ventas.productos');
+Route::group(['middleware' => [ 'can:ver reportes' ]], function() {
+    Route::get('/ventas/diarias', 'VentasController@diarias')
+        ->name('ventas.diarias');
 
-Route::get('/ventas/vendedores', 'VentasController@vendedores')
-    ->name('ventas.vendedores');
+    Route::get('/ventas/productos', 'VentasController@productos')
+        ->name('ventas.productos');
 
+    Route::get('/ventas/vendedores', 'VentasController@vendedores')
+        ->name('ventas.vendedores');
+});
