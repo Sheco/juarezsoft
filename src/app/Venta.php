@@ -64,8 +64,6 @@ class Venta extends Model
         // Hacer in ciclo en donde se obtenga un producto aleatorio
         // y una cantidad aleatoria entre 1 y 3, hasta que la venta 
         // tenga un total de al menos $1000
-        $productos = Producto::all();
-        $usuarios = User::role('vendedor')->get();
         echo "Iniciando...";
 
         $objetoAleatorio = function(
@@ -73,27 +71,15 @@ class Venta extends Model
             $catalogo, 
             $nombre, 
             $random,
-            $frecuencia, 
-            $chequeo=null) {
+            $frecuencia) {
 
-            if($chequeo === null) {
-                $chequeo = function($objeto) { return true; };
-            }
-
-            $lista = $lista->shuffle();
-
-            do {
-                if($lista->count() == 0) {
-                    return;
-                }
-                $objeto = $lista->shift();
-            } while(($objeto->$frecuencia < $random) or !$chequeo($objeto));
-
-
-            return $objeto;
+            return $lista->filter(function($item) use ($random, $frecuencia) {
+                return $item->$frecuencia >= $random;
+            })->shuffle()->first();
         };
 
-        $obtenerUsuario = function($random) use ($objetoAleatorio, $usuarios) {
+        $obtenerUsuario = function($random) use ($objetoAleatorio) {
+            $usuarios = User::role('vendedor')->get();
             return $objetoAleatorio($usuarios, 
                 'usuarios', 
                 'name', 
@@ -101,19 +87,37 @@ class Venta extends Model
                 'frecuenciaVentas');
         };
 
-        $obtenerProducto = function($random) use ($objetoAleatorio, $productos) {
+        $obtenerProducto = function($random) use ($objetoAleatorio) {
+            $productos = Producto::all();
             return $objetoAleatorio($productos, 
                 'productos',
                 'nombre', 
                 $random,
-                'frecuenciaCompras',
-                function($objeto) {
-                    return $objeto->stock>0;
-                });
+                'frecuenciaCompras');
+        };
+
+        
+        $vender = function(User $user, $productos, $fecha) {
+            return DB::transaction(function() use ($user, $productos, $fecha) {
+                $venta = new Venta;
+                $venta->user_id = $user->id;
+                $venta->fecha_hora = $fecha;
+                $venta->fecha = $fecha->format('Y-m-d');
+                $venta->save();
+
+                foreach($productos as $producto) {
+                    list($id, $cantidad) = $producto;
+
+                    $venta->productos()->attach($producto, [
+                        'cantidad' => $cantidad
+                    ]);
+                }
+                return $venta;
+            });
         };
             
         $ventaAleatoria = function($fecha, $compraMinima) 
-            use ($obtenerProducto, $obtenerUsuario) {
+            use ($obtenerProducto, $obtenerUsuario, $vender) {
             $fecha = (new Carbon($fecha))
                 ->add(rand(0, 12*60*60), 'seconds');
             $usuario = $obtenerUsuario(rand(0, 100));
@@ -123,19 +127,18 @@ class Venta extends Model
 
             $rareza = rand(0, 100);
             while($total<$compraMinima) {
-                $producto = $obtenerProducto($rareza);
+                $producto = $obtenerProducto(intval($rareza*0.8));
                 if(!$producto) {
-                    echo "No se encontraron productos con rareza $rareza\n";
                     $rareza = rand(0, $rareza);
                     if($rareza<10)
                         break;
                     continue;
                 }
-                $cantidad = rand(1, 3);
+                $cantidad = min(rand(1, 3), $producto->stock);
                 $total += $producto->precio * $cantidad;
 
                 echo "Vendiendo $cantidad {$producto->nombre}: $". 
-                    ($cantidad*$producto->precio)."\n";
+                    ($cantidad*$producto->precio) ."\n";
 
                 $venta_productos[] = [ $producto->id, $cantidad ];    
             }
@@ -145,10 +148,7 @@ class Venta extends Model
                 return [ null, 0 ];
             }
 
-            $venta = Venta::crear($usuario, $venta_productos);
-            $venta->fecha_hora = $fecha;
-            $venta->fecha = $fecha->format('Y-m-d');
-            $venta->save();
+            $venta = $vender($usuario, $venta_productos, $fecha);
             return [ $venta, $total ];
         };
 
@@ -164,7 +164,7 @@ class Venta extends Model
             while($total<$ventaTotal) {
                 list($venta, $totalOperacion) = $ventaAleatoria($fecha, $compraMinima);
                 if(!$venta) {
-                    continue;
+                    break;
                 }
                 $total += $totalOperacion;
                 $ventas[] = $venta;
@@ -175,25 +175,23 @@ class Venta extends Model
     }
 
     static function poblaMesAleatoriamente($fecha) {
-        DB::transaction(function() use ($fecha) {
-            $fecha = new Carbon($fecha);
-            $inicio = $fecha->clone()->startOfMonth();
-            $fin = $fecha->clone()->endOfMonth();
-            DB::table('ventas')->whereBetween('fecha', [$inicio, $fin])->delete();
+        $fecha = new Carbon($fecha);
+        $inicio = $fecha->clone()->startOfMonth();
+        $fin = $fecha->clone()->endOfMonth();
+        DB::table('ventas')->whereBetween('fecha', [$inicio, $fin])->delete();
 
-            $dias = $fin->diff($inicio)->days+1;
-            $especial = $inicio->clone()->add(rand(0, $dias), 'days');
+        $dias = $fin->diff($inicio)->days+1;
+        $especial = $inicio->clone()->add(rand(0, $dias), 'days');
 
-            $periodo = CarbonPeriod::create($inicio, $dias);
-            foreach($periodo as $dia) {
-                $finDeSemana = $dia->isoWeekday()>5;
-                $ingreso = $finDeSemana? 
-                    2500000:
-                    ($dia->format('Y-m-d')==$especial->format('Y-m-d')? 
-                        1750000:
-                        750000);
-                Venta::ventasAleatoriasDelDia($dia->format('Y-m-d'), $ingreso, 20);
-            }
-        });
+        $periodo = CarbonPeriod::create($inicio, $dias);
+        foreach($periodo as $dia) {
+            $finDeSemana = $dia->isoWeekday()>5;
+            $ingreso = $finDeSemana? 
+                2500000:
+                ($dia->format('Y-m-d')==$especial->format('Y-m-d')? 
+                    1750000:
+                    750000);
+            Venta::ventasAleatoriasDelDia($dia->format('Y-m-d'), $ingreso, 20);
+        }
     }
 }

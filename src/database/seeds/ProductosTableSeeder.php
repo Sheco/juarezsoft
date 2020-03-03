@@ -60,12 +60,12 @@ class ProductosTableSeeder extends Seeder
                 [ "nombre"=>"Patineta", "codigo"=>"patineta", "precio"=>400, "departamento_id"=>6, 'frecuenciaCompras'=> 90],
 
                 [ "nombre"=>"Reloj Rolex", "codigo"=>"relojrolex", "precio"=>1500, "departamento_id"=>7, 'frecuenciaCompras'=> 30],
-                [ "nombre"=>"Reloj de oro", "codigo"=>"relojoro", "precio"=>7000, "departamento_id"=>7, 'frecuenciaCompras'=> 10],
+                [ "nombre"=>"Reloj de oro", "codigo"=>"relojoro", "precio"=>7000, "departamento_id"=>7, 'frecuenciaCompras'=> 30],
                 [ "nombre"=>"Reloj para dama", "codigo"=>"relojdama", "precio"=>1800, "departamento_id"=>7, 'frecuenciaCompras'=> 60],
 
-                [ "nombre"=>"Consola XBox One S", "codigo"=>"xboxonex", "precio"=>8000, "departamento_id"=>7, 'frecuenciaCompras'=> 20],
-                [ "nombre"=>"Consola Nintendo Switch", "codigo"=>"nintendoswitch", "precio"=>6000, "departamento_id"=>7, 'frecuenciaCompras'=> 20],
-                [ "nombre"=>"Consola Playstation 4", "codigo"=>"playstation4", "precio"=>8000, "departamento_id"=>7, 'frecuenciaCompras'=> 20],
+                [ "nombre"=>"Consola XBox One S", "codigo"=>"xboxonex", "precio"=>8000, "departamento_id"=>7, 'frecuenciaCompras'=> 30],
+                [ "nombre"=>"Consola Nintendo Switch", "codigo"=>"nintendoswitch", "precio"=>6000, "departamento_id"=>7, 'frecuenciaCompras'=> 30],
+                [ "nombre"=>"Consola Playstation 4", "codigo"=>"playstation4", "precio"=>8000, "departamento_id"=>7, 'frecuenciaCompras'=> 30],
 
                 [ "nombre"=>"Libro Harry Potter 1", "codigo"=>"libroharrypotter1", "precio"=>200, "departamento_id"=>8, 'frecuenciaCompras'=> 30],
                 [ "nombre"=>"Película Harry Potter 1", "codigo"=>"peliculaharrypotter1", "precio"=>400, "departamento_id"=>8, 'frecuenciaCompras'=> 30],
