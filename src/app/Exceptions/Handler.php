@@ -2,12 +2,11 @@
 
 namespace App\Exceptions;
 
-use Throwable;
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-
     /**
      * A list of the exception types that are not reported.
      *
@@ -35,7 +34,7 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function report(Throwable $exception)
+    public function report(Exception $exception)
     {
         parent::report($exception);
     }
@@ -49,7 +48,7 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
     }
