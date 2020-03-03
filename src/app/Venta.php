@@ -78,6 +78,7 @@ class Venta extends Model
             ->join('productos', 'productos.id', '=', 'venta_productos.producto_id')
             ->join('ventas', 'ventas.id', '=', 'venta_productos.venta_id')
             ->select('ventas.fecha', 
+                DB::raw('sum(cantidad) as cantidad'),
                 'productos.nombre', 
                 DB::raw('sum(productos.precio*cantidad) as total'))
             ->groupBy('fecha', 'productos.id')
