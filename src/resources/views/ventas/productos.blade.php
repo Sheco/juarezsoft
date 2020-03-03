@@ -27,8 +27,8 @@
                 <option value=""{{ $orden==""? " selected": "" }}>
                   Total
                 </option>
-                <option value="fecha"{{ $orden=="fecha"?" selected": ""}}>
-                  Fecha
+                <option value="fecha,total"{{ $orden=="fecha,total"?" selected": ""}}>
+                  Fecha, Total
                 </option>
               </select>
             </div>
