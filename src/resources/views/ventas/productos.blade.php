@@ -22,6 +22,18 @@
             </div>
 
             <div class="form-group">
+              <label for="producto_id">Producto:</label>
+              <select name="producto_id" id="producto_id" class="form-control">
+                <option value="">-- Todos</option>
+              @foreach ($productos as $producto)
+                <option value="{{ $producto->id }}"{{ 
+                  $producto->id == $producto_id? " selected": ""
+                }}>{{ $producto->departamento->nombre }} / {{ $producto->nombre }}</option>
+              @endforeach
+              </select>
+            </div>
+
+            <div class="form-group">
               <label for="orden">Ordenación:</label>
               <select name="orden" class="form-control">
                 <option value=""{{ $orden==""? " selected": "" }}>

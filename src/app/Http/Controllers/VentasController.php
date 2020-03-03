@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Venta;
+use App\Producto;
 
 use Illuminate\Http\Request;
 
@@ -21,11 +22,20 @@ class VentasController extends Controller
         $fecha_inicio = $request->input('fecha_inicio');
         $fecha_final = $request->input('fecha_final');
         $orden = $request->input('orden');
+        $producto_id = $request->input('producto_id');
 
-        $datos = Venta::reporteProductos($fecha_inicio, $fecha_final, $orden);
-        return view('ventas.productos', 
-            compact('fecha_inicio', 'fecha_final', 'orden', 'datos')
-        );
+        $productos = Producto::with([
+            'departamento'=>function($query) { 
+                $query->orderBy('nombre'); 
+            }])->get();
+
+        $datos = Venta::reporteProductos($fecha_inicio, $fecha_final, 
+            $orden, $producto_id);
+
+        return view('ventas.productos', compact(
+            'fecha_inicio', 'fecha_final', 'orden',             
+            'datos', 'productos', 'producto_id'
+        ));
     }
 
     function vendedores(Request $request) {

@@ -81,9 +81,8 @@ class Venta extends Model
             ->get();
     }
 
-    public static function reporteProductos($fecha_inicio, 
-        $fecha_final,
-        $orden) {
+    public static function reporteProductos($fecha_inicio, $fecha_final,
+        $orden, $producto_id=null) {
         if(!$fecha_inicio || !$fecha_final) 
             return collect([]);
 
@@ -98,6 +97,9 @@ class Venta extends Model
                 DB::raw('sum(productos.precio*cantidad) as total'))
             ->groupBy('fecha', 'productos.id')
             ->whereBetween('fecha', [ $fecha_inicio, $fecha_final ]);
+
+        if($producto_id)
+            $query->where('venta_productos.producto_id', $producto_id);
 
         foreach(explode(',', $orden) as $o) {
             $query->orderBy($o, 'desc');
