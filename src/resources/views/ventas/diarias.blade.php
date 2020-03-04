@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-3">
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
@@ -37,7 +37,7 @@
           @foreach ($datos as $dato)
             <tr>
               <td>{{ (new Carbon\Carbon($dato->fecha))->format('Y-M-d') }}</td>
-              <td align="right">{{ number_format($dato->total, 2) }}</td>
+              <td align="right">${{ number_format($dato->total, 2) }}</td>
             </tr>
           @endforeach
         </table>

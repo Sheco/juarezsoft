@@ -64,7 +64,7 @@
               <td>{{ $dato->fecha }}</td>
               <td>{{ $dato->nombre }}</td>
               <td align="right">{{ number_format($dato->cantidad, 0) }}</td>
-              <td align="right">{{ number_format($dato->total, 2) }}</td>
+              <td align="right">${{ number_format($dato->total, 2) }}</td>
             </tr>
           @endforeach
         </table>

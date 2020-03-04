@@ -35,8 +35,8 @@
             <tr>
               <td>{{ $dato->nombre }}</td>
               <td align="right">{{ number_format($dato->cantidad, 0) }}</td>
-              <td align="right">{{ number_format($dato->total, 2) }}</td>
-              <td align="right">{{ number_format($dato->total*0.02, 2) }}</td>
+              <td align="right">${{ number_format($dato->total, 2) }}</td>
+              <td align="right">${{ number_format($dato->total*0.02, 2) }}</td>
             </tr>
           @endforeach
         </table>

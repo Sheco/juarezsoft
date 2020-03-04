@@ -39,10 +39,10 @@
               <th>{{ $dato->rol }}</d>
               <td>{{ $dato->nombre }}</td>
               <td align="right">{{ number_format($dato->cantidad, 0) }}</td>
-              <td align="right">{{ number_format($dato->ventas, 2) }}</td>
-              <td align="right">{{ number_format($dato->comision, 2) }}</td>
-              <td align="right">{{ number_format($dato->sueldo, 2) }}</td>
-              <td align="right">{{ number_format($dato->sueldo_final, 2) }}</td>
+              <td align="right">${{ number_format($dato->ventas, 2) }}</td>
+              <td align="right">${{ number_format($dato->comision, 2) }}</td>
+              <td align="right">${{ number_format($dato->sueldo, 2) }}</td>
+              <td align="right">${{ number_format($dato->sueldo_final, 2) }}</td>
             </tr>
           @endforeach
         </table>
