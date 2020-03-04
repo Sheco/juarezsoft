@@ -65,7 +65,7 @@ class User extends Authenticatable
                 DB::raw('sueldo+coalesce(sum(total)*0.02,0) as sueldo_final')
             )
             ->groupBy('users.name')
-            ->orderByRaw('roles.name,sum(total) desc')
+            ->orderByRaw('roles.name,sueldo+coalesce(sum(total)*0.02,0) desc')
             ->get();
     }
 }
