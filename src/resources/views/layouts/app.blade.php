@@ -73,6 +73,15 @@
         </nav>
 
         <main class="py-4">
+            @if ($errors->count())
+                <div class="container alert alert-danger">
+                    <ul>
+                    @foreach ($errors->all() as $error) 
+                        <li>{{$error}}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>

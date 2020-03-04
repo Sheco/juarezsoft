@@ -25,7 +25,17 @@ Route::group(['middleware' => [ 'can:ver reportes' ]], function() {
 
     Route::get('/ventas/vendedores', 'VentasController@vendedores')
         ->name('ventas.vendedores');
+});
 
+Route::group(['middleware' => ['can:administrar usuarios']], function() {
     Route::get('/users/nomina', 'UsersController@nomina')
         ->name('users.nomina');
+    Route::get('/users/{user}/roles', 'UsersController@roles')
+        ->name('users.roles');
+    Route::post('/users/{user}/addRole', 'UsersController@addRole')
+        ->name('users.addRole');
+    Route::post('/users/{user}/delRole', 'UsersController@delRole')
+        ->name('users.delRole');
+    Route::resource('/users', 'UsersController');
 });
+
