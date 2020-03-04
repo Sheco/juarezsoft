@@ -8,7 +8,7 @@ use App\User;
 class UsersController extends Controller
 {
     function nomina(Request $request) {
-        $fecha_inicio = $request->input('fecha_inicio');
+        $fecha_inicio = $request->input('fecha_inicio', date('Y-m-d'));
 
         $datos = User::reporteNomina($fecha_inicio);
         return view('users.nomina', compact(
