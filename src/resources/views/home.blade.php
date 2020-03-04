@@ -20,10 +20,10 @@
         </div>
 
     </div>
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Ventas</div>
+                <div class="card-header">Reportes de Ventas</div>
                 <div class="card-body">
                     <div class="nav flex-column list-group">
                         @can('ver reportes')
