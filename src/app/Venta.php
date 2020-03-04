@@ -227,7 +227,6 @@ class Venta extends Model
             }
 
             $venta = $vender($usuario, $venta_productos, $fecha);
-            echo "Venta: $venta->id\n";
             return [ $venta, $total ];
         };
 
