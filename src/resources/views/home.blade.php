@@ -42,6 +42,24 @@
                                 Ventas por vendedor
                             </a>
                         </li>
+                        @endcan
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @can('ver administración')
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">Administración</div>
+                <div class="card-body">
+                    <div class="nav flex-column list-group">
+                        @can('administrar usuarios')
+                        <li class="nav item list-group-item">
+                            <a class="nav-link" href="{{ route('users.index') }}">
+                                Usuarios
+                            </a>
+                        </li>
                         <li class="nav item list-group-item">
                             <a class="nav-link" href="{{ route('users.nomina') }}">
                                 Nómina
@@ -52,6 +70,8 @@
                 </div>
             </div>
         </div>
+        @endcan
+
     </div>
 </div>
 @endsection

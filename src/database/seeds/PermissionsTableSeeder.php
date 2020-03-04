@@ -19,6 +19,8 @@ class PermissionsTableSeeder extends Seeder
           ]);
         $verReportes = Permission::create(['name'=>'ver reportes']);
         $role->givePermissionTo($verReportes);
+        $admin = Permission::create(['name'=>'ver administración']);
+        $role->givePermissionTo($admin);
         $adminUsers = Permission::create(['name'=>'administrar usuarios']);
         $role->givePermissionTo($adminUsers);
 
