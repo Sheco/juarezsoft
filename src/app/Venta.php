@@ -234,7 +234,7 @@ class Venta extends Model
         return DB::transaction(function() 
             use ($fecha, $ventaTotal, $ventaAleatoria, $porcentajeMargen) {
             $total = 0;
-            $compraMinima = 1000;
+            $compraMinima = 2000;
             $ventas = [];
             $margen = $ventaTotal*$porcentajeMargen/100;
             $ventaTotal += rand(0, $margen*2)-$margen;
