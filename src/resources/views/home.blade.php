@@ -42,6 +42,11 @@
                                 Ventas por vendedor
                             </a>
                         </li>
+                        <li class="nav item list-group-item">
+                            <a class="nav-link" href="{{ route('users.nomina') }}">
+                                Nómina
+                            </a>
+                        </li>
                         @endcan
                     </div>
                 </div>

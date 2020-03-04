@@ -25,4 +25,7 @@ Route::group(['middleware' => [ 'can:ver reportes' ]], function() {
 
     Route::get('/ventas/vendedores', 'VentasController@vendedores')
         ->name('ventas.vendedores');
+
+    Route::get('/users/nomina', 'UsersController@nomina')
+        ->name('users.nomina');
 });
