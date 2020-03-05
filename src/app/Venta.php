@@ -3,7 +3,6 @@
 namespace App;
 
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
