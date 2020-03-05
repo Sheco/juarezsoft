@@ -182,11 +182,11 @@ class VentasTableSeeder extends Seeder
      */
     function poblaMesAleatoriamente($fecha, $margen) {
         $fecha = new Carbon($fecha);
-        $inicio = $fecha->clone()->startOfMonth();
-        $fin = $fecha->clone()->endOfMonth();
+        $inicio = $fecha->clone()->subtract(40, 'days');
+        $fin = $fecha->clone();
         DB::table('ventas')->whereBetween('fecha', [$inicio, $fin])->delete();
 
-        $dias = $fin->diff($inicio)->days+1;
+        $dias = $fin->diff($inicio)->days;
         $especial = $inicio->clone()->add(rand(0, $dias), 'days');
 
         $periodo = CarbonPeriod::create($inicio, $dias);
