@@ -24,7 +24,7 @@ class SolicitudesCompraTableSeeder extends Seeder
                 // aproximadamente
 
                 $proveedor = $producto->proveedores->shuffle()->first();
-                $cantidad = 1000;
+                $cantidad = 400;
                 echo "Comprando $cantidad $producto->nombre a $proveedor->nombre\n";
 
                 $fecha_solicitud = Carbon::now()

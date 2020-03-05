@@ -120,6 +120,25 @@ class Venta extends Model
         return $query->get();
     }
 
+    public static function reporteInventario() {
+        $fecha_final = Carbon::now();
+        $fecha_inicio = $fecha_final->clone()->subtract(7, 'days');
+
+        return DB::table('venta_productos')
+            ->join('productos', 'productos.id', '=', 'venta_productos.producto_id')
+            ->join('ventas', 'ventas.id', '=', 'venta_productos.venta_id')
+            ->select(
+                'productos.nombre', 
+                'productos.stock',
+                DB::raw('sum(cantidad) as vendidos'),
+                )
+            ->groupBy('productos.id')
+            ->havingRaw("productos.stock-(sum(cantidad)*2) < 0")
+            ->whereBetween('fecha', [ $fecha_inicio, $fecha_final ])
+            ->orderByRaw('productos.stock-sum(cantidad)')
+            ->get();
+    }
+
     public static function reporteVendedores($fecha) {
         if(!$fecha) return collect([]);
 

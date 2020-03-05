@@ -21,6 +21,30 @@
 
     </div>
     <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Inventario bajo</div>
+                <div class="card-body">
+                    Los siguientes productos estan a punto de agotarse, en la siguiente tabla se muestra la cantidad de cada producto que se ha vendido en los ultimos 7 dias así como tambien la cantidad que se tiene de abasto.
+                    <table class="table table-bordered table-striped table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Vendidos</th>
+                            <th>Abasto</th>
+                        </tr>
+                    </thead>
+                    @foreach ($inventario as $producto)
+                        <tr>
+                            <td>{{$producto->nombre}}</td>
+                            <td align="right">{{number_format($producto->vendidos,0)}}</td>
+                            <td align="right">{{number_format($producto->stock, 0)}}</td>
+                        </tr>
+                    @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="col-md-4 mt-3">
             <div class="card">
                 <div class="card-header">Reportes de Ventas</div>
