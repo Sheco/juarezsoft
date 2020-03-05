@@ -20,14 +20,19 @@ class VentasTableSeeder extends Seeder
         $this->poblaMesAleatoriamente(Carbon::now()->format('Y-m-d'), 5);
     }
 
+    /**
+     *   Crear ventas aleatoriamente, entre las 9:00am y 7:00pm
+     *   Usando un vendedor aleatorio y una lista de productos aleatorios
+     *
+     *   @return void
+     */
     private function ventasAleatoriasDelDia($fecha, $ventaTotal, $porcentajeMargen=0) {
-        // crear una venta aleatoria.
-        // Generar una hora aleatoria entre 9:00 y 7:00pm
-        // Obtener un usuario aleatorio
-        // Hacer in ciclo en donde se obtenga un producto aleatorio
-        // y una cantidad aleatoria entre 1 y 3, hasta que la venta 
-        // tenga un total de al menos $1000
 
+        /**
+         * Con una lista de objetos, los filtra dejando solo los que sean
+         * candidatos validos según la frecuencia y devuelve uno de ellos
+         * al azar
+         */
         $objetoAleatorio = function(
             $lista,
             $catalogo, 
@@ -40,6 +45,10 @@ class VentasTableSeeder extends Seeder
             })->shuffle()->first();
         };
 
+        /**
+         * Obtiene un objeto aleatorio, bajando el valor de frecuencia
+         * de ser necesario para forzar que se obtenga un elemento
+         */
         $objetoAleatorioForzado = function(
             $lista,
             $catalogo,
@@ -55,6 +64,9 @@ class VentasTableSeeder extends Seeder
             return $obj;
         };
 
+        /**
+         * Wrapper para obtener un usuario aleatorio
+         */
         $obtenerUsuario = function($random) use ($objetoAleatorioForzado) {
             $usuarios = User::role('vendedor')->get();
             return $objetoAleatorioForzado($usuarios, 
@@ -64,6 +76,9 @@ class VentasTableSeeder extends Seeder
                 'frecuenciaVentas');
         };
 
+        /**
+         * Wrapper para obtener un producto aleatorio
+         */
         $obtenerProducto = function($random) use ($objetoAleatorioForzado) {
             $productos = Producto::all();
             return $objetoAleatorioForzado($productos, 
@@ -73,7 +88,11 @@ class VentasTableSeeder extends Seeder
                 'frecuenciaCompras');
         };
 
-        
+        /**
+         * Fingir una venta, esta funcion es basicamente la misma que
+         * Venta::crear() pero con ligeros ajustes para este entorno
+         * de población
+         */
         $vender = function(User $user, $productos, $fecha) {
             return DB::transaction(function() use ($user, $productos, $fecha) {
                 $venta = new Venta;
@@ -100,7 +119,11 @@ class VentasTableSeeder extends Seeder
                 return $venta;
             });
         };
-            
+
+        /**
+         * Aquí es donde se obtiene el usuario y la lista de productos
+         * para generar lo que es una venta individual.
+         */    
         $ventaAleatoria = function($fecha, $compraMinima) 
             use ($obtenerProducto, $obtenerUsuario, $vender) {
             $fecha = (new Carbon($fecha))
@@ -130,7 +153,10 @@ class VentasTableSeeder extends Seeder
             return [ $venta, $total ];
         };
 
-        // generar ventas hasta llegar al objetivo
+        /*
+         * Generar ventas aleatorias hasta llegar a un monto de venta
+         * especifico para el dia
+         */
         return DB::transaction(function() 
             use ($fecha, $ventaTotal, $ventaAleatoria, $porcentajeMargen) {
             $total = 0;
@@ -152,6 +178,11 @@ class VentasTableSeeder extends Seeder
         });
     }
 
+    /*
+     * Genera ventas aleatorias día por día para llenar el mes, asegurandose
+     * de que se cumplan los requerimientos de que entre semana se venda
+     * cierto importe, fin de semana otro y un día aleatorio al mes otro importe
+     */
     function poblaMesAleatoriamente($fecha, $margen) {
         $fecha = new Carbon($fecha);
         $inicio = $fecha->clone()->startOfMonth();
