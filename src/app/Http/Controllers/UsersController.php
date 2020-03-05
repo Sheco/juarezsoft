@@ -143,4 +143,14 @@ class UsersController extends Controller
         User::findOrFail($id)->delete();
         return redirect()->route("users.index");
     }
+
+    public function ventas(User $user, Request $request) {
+        $fecha = $request->get('fecha', date('Y-m-d'));
+
+        return view('users.ventas', [
+            'fecha'=>$fecha,
+            'user'=>$user,
+            'datos'=> $user->reporteVentas($fecha)
+        ]);
+    }
 }

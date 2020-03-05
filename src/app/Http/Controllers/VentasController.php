@@ -50,4 +50,8 @@ class VentasController extends Controller
             'fecha_inicio', 'datos'
         ));
     }
+
+    function ver(Venta $venta) {
+        return view('ventas.ver', compact('venta'));
+    }
 }

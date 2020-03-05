@@ -74,4 +74,22 @@ class User extends Authenticatable
             ->orderByRaw('roles.name,sueldo+coalesce(sum(total)*0.02,0) desc')
             ->get();
     }
+
+    public function reporteVentas($fecha) {
+        $fecha = new Carbon($fecha);
+
+        return DB::table('ventas')
+            ->join('venta_productos', 'venta_productos.venta_id', '=', 'ventas.id')
+            ->select(
+                'ventas.id',
+                'fecha_hora',
+                'total',
+                DB::raw('count(distinct venta_productos.id) as productos')
+            )            
+            ->orderBy('fecha_hora', 'asc')
+            ->where('user_id', $this->id)
+            ->where('fecha', $fecha->format('Y-m-d'))
+            ->groupBy('ventas.id')
+            ->get();
+    }
 }

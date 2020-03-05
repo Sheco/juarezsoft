@@ -36,6 +36,12 @@ Route::group(['middleware' => ['can:administrar usuarios']], function() {
         ->name('users.addRole');
     Route::post('/users/{user}/delRole', 'UsersController@delRole')
         ->name('users.delRole');
+    Route::get('/users/{user}/ventas', 'UsersController@ventas')
+        ->name('users.ventas');        
+
     Route::resource('/users', 'UsersController');
+
+    Route::get('/ventas/{venta}', 'VentasController@ver')
+        ->name('ventas.ver');
 });
 

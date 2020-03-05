@@ -11,6 +11,7 @@
         <th>Email</th>
         <th>Nombre</th>
         <th>Roles</th>
+        <th></th>
     </tr>
 </thead>
 @foreach ($datos as $obj) 
@@ -19,6 +20,7 @@
                 {{$obj->email}}</a></td>
         <td>{{$obj->name}}</td>
         <td>{{$obj->roles->pluck('name')->join(', ')}}</td>
+        <td><a href="{{route('users.ventas', $obj->id)}}">Ventas</a></td>
     </tr>
 @endforeach
 </table>

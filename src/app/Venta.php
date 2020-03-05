@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\DB;
 class Venta extends Model
 {
     protected $table = 'ventas';
+    protected $dates = [
+        'fecha_hora', 
+    ];
+
+    protected $casts = [
+        'fecha' => 'datetime:Y-m-d'
+    ];
 
     public function productos() {
         return $this->belongsToMany('App\Producto', 'venta_productos')
@@ -16,6 +23,10 @@ class Venta extends Model
                 'cantidad',
                 'precio',
             ]);
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User');
     }
 
     /* 
