@@ -134,7 +134,6 @@ class Venta extends Model
         // Hacer in ciclo en donde se obtenga un producto aleatorio
         // y una cantidad aleatoria entre 1 y 3, hasta que la venta 
         // tenga un total de al menos $1000
-        echo "Iniciando...";
 
         $objetoAleatorio = function(
             $lista,
@@ -148,18 +147,33 @@ class Venta extends Model
             })->shuffle()->first();
         };
 
-        $obtenerUsuario = function($random) use ($objetoAleatorio) {
+        $objetoAleatorioForzado = function(
+            $lista,
+            $catalogo,
+            $nombre,
+            $random,
+            $frecuencia) use ($objetoAleatorio) {
+            while(!$obj = $objetoAleatorio($lista, $catalogo,
+                $nombre, $random, $frecuencia)) {
+                if($random < 10) 
+                    return null;
+                $random = $random * 0.8;
+            }
+            return $obj;
+        };
+
+        $obtenerUsuario = function($random) use ($objetoAleatorioForzado) {
             $usuarios = User::role('vendedor')->get();
-            return $objetoAleatorio($usuarios, 
+            return $objetoAleatorioForzado($usuarios, 
                 'usuarios', 
                 'name', 
                 $random,
                 'frecuenciaVentas');
         };
 
-        $obtenerProducto = function($random) use ($objetoAleatorio) {
+        $obtenerProducto = function($random) use ($objetoAleatorioForzado) {
             $productos = Producto::all();
-            return $objetoAleatorio($productos, 
+            return $objetoAleatorioForzado($productos, 
                 'productos',
                 'nombre', 
                 $random,
@@ -203,15 +217,8 @@ class Venta extends Model
             $total = 0;
             $venta_productos = [];
 
-            $rareza = rand(0, 100);
             while($total<$compraMinima) {
-                $producto = $obtenerProducto(intval($rareza*0.8));
-                if(!$producto) {
-                    $rareza = rand(0, $rareza);
-                    if($rareza<10)
-                        break;
-                    continue;
-                }
+                $producto = $obtenerProducto(rand(0, 100));
                 $cantidad = min(rand(1, 3), $producto->stock);
                 $total += $producto->precio * $cantidad;
 
