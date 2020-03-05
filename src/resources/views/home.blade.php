@@ -21,7 +21,7 @@
 
     </div>
     <div class="row mt-3">
-        <div class="col-md-4">
+        <div class="col-md-4 mt-3">
             <div class="card">
                 <div class="card-header">Reportes de Ventas</div>
                 <div class="card-body">
@@ -49,7 +49,7 @@
         </div>
 
         @can('ver administración')
-        <div class="col-4">
+        <div class="col-md-4 mt-3">
             <div class="card">
                 <div class="card-header">Administración</div>
                 <div class="card-body">
