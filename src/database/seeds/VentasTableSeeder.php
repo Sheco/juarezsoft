@@ -139,13 +139,9 @@ class VentasTableSeeder extends Seeder
                 $cantidad = min(rand(1, 3), $producto->stock);
                 $total += $producto->precio * $cantidad;
 
-                echo "Vendiendo $cantidad {$producto->nombre}: $". 
-                    ($cantidad*$producto->precio) ."\n";
-
                 $venta_productos[] = [ $producto->id, $cantidad ];    
             }
 
-            echo "Total de la operacion: $". number_format($total) ."\n";
             if(!$total) {
                 return [ null, 0 ];
             }
@@ -174,7 +170,7 @@ class VentasTableSeeder extends Seeder
                 $total += $totalOperacion;
                 $ventas[] = $venta;
             }
-            echo "Total del dia: $". number_format($total, 2) ."\n";
+            echo "Total($fecha): $". number_format($total, 2) ."\n";
             return $ventas;
         });
     }
