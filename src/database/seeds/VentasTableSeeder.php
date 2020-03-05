@@ -127,7 +127,7 @@ class VentasTableSeeder extends Seeder
          */    
         $ventaAleatoria = function($fecha, $compraMinima) 
             use ($obtenerProducto, $obtenerUsuario, $vender) {
-            $fecha = (new Carbon($fecha))
+            $fecha = (new Carbon("$fecha 09:00"))
                 ->add(rand(0, 12*60*60), 'seconds');
             $usuario = $obtenerUsuario(rand(0, 100));
 
