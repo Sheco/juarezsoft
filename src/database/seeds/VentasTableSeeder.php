@@ -109,6 +109,7 @@ class VentasTableSeeder extends Seeder
                     $total += $producto->precio*$cantidad;
 
                     $venta->productos()->attach($producto, [
+                        'precio' => $producto->precio,
                         'cantidad' => $cantidad
                     ]);
                 }

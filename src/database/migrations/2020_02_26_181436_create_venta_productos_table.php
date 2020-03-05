@@ -18,6 +18,7 @@ class CreateVentaProductosTable extends Migration
             $table->unsignedBigInteger('venta_id');
             $table->unsignedBigInteger('producto_id');
             $table->unsignedInteger('cantidad');
+            $table->decimal('precio', 9, 2);
             $table->timestamps();
 
             $table->foreign('venta_id')

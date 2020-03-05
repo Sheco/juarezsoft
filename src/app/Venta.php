@@ -13,7 +13,8 @@ class Venta extends Model
     public function productos() {
         return $this->belongsToMany('App\Producto', 'venta_productos')
             ->withPivot([
-                'cantidad'
+                'cantidad',
+                'precio',
             ]);
     }
 
@@ -45,6 +46,7 @@ class Venta extends Model
                 $total += $producto->precio*$cantidad;
 
                 $venta->productos()->attach($producto, [
+                    'precio'=> $producto->precio,
                     'cantidad' => $cantidad
                 ]);
             }
