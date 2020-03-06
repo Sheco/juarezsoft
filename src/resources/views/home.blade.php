@@ -49,6 +49,7 @@
     </div>
     @endif
 
+    <div class="row mt-3">
         <div class="col-md-4 mt-3">
             <div class="card">
                 <div class="card-header">Reportes de Ventas</div>
