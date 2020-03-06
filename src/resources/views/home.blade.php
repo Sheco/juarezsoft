@@ -20,12 +20,13 @@
         </div>
 
     </div>
+    @if ($inventario->count())
     <div class="row mt-3">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Inventario bajo</div>
+                <div class="card-header">Productos agotandose</div>
                 <div class="card-body">
-                    Los siguientes productos estan a punto de agotarse, en la siguiente tabla se muestra la cantidad de cada producto que se ha vendido en los ultimos 7 dias así como tambien la cantidad que se tiene de abasto.
+                    Los siguientes productos estan a punto de agotarse. A continuación se muestra la cantidad vendida en los ultimos 7 dias así como tambien la cantidad que se tiene de abasto.
                     <table class="table table-bordered table-striped table-hover mt-3">
                     <thead>
                         <tr>
@@ -45,6 +46,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    @endif
+
         <div class="col-md-4 mt-3">
             <div class="card">
                 <div class="card-header">Reportes de Ventas</div>
