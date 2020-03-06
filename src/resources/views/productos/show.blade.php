@@ -44,5 +44,60 @@
             TODO
         </div>
     </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Gráficas</div>
+                <div class="body"> <canvas id="ventas"></canvas></div>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    window.onload = function() {
+        window.stats = new Chart(
+            document.getElementById('ventas').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($fechas) !!},
+                datasets: [{
+                    label: 'Unidades vendidas',
+                    backgroundColor: 'rgb(54, 162, 235)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false,
+                    data: {!! json_encode($vendidos) !!}
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: { 
+                            display: true,
+                            labelString: 'Fecha'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: { 
+                            display: true,
+                            labelString: 'Unidades'
+                        }
+                    }]
+                }
+            }
+        })
+    }
+        
+</script>
 @endsection

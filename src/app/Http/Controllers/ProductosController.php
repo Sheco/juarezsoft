@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Producto;
 use App\Departamento;
+use Carbon\Carbon;
 
 class ProductosController extends Controller
 {
@@ -61,8 +62,21 @@ class ProductosController extends Controller
      */
     public function show(Producto $producto)
     {
+        $fecha_final = Carbon::now();
+        $fecha_inicio = $fecha_final->clone()->subtract(30, 'days');
+
+        $stats = $producto->estadisticas($fecha_inicio, $fecha_final);
+        $fechas = $stats->keys();
+
+        $vendidos = $stats->map(function($row) { 
+                return intval($row->vendidos); 
+            })->values();
+
+
         return view('productos.show', [
-            'obj'=>$producto
+            'obj'=>$producto,
+            'vendidos'=>$vendidos,
+            'fechas'=>$fechas
         ]);
     }
 
