@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Producto;
 use App\Departamento;
+use App\Proveedor;
 use Carbon\Carbon;
 
 class ProductosController extends Controller
@@ -76,7 +77,7 @@ class ProductosController extends Controller
         return view('productos.show', [
             'obj'=>$producto,
             'vendidos'=>$vendidos,
-            'fechas'=>$fechas
+            'fechas'=>$fechas,
         ]);
     }
 
@@ -125,5 +126,32 @@ class ProductosController extends Controller
     {
         $producto->delete();
         return redirect()->route('productos.index');
+    }
+
+    public function proveedores(Producto $producto) {
+        return view("productos.proveedores", compact("producto"));            
+    }
+
+    public function addProveedor(Producto $producto) {
+        $proveedores = Proveedor::whereNotIn('id',
+            $producto->proveedores->pluck('id')
+        );
+        $obj = $producto;
+        return view('productos.addProveedor', compact(
+            'obj', 'proveedores',
+        ));
+    }
+
+    public function storeProveedor(Producto $producto, Request $request) {
+        $producto->proveedores()->attach($request->get('proveedor_id'), [
+            'precio'=>$request->get('precio')
+        ]);
+        return redirect()->route('productos.show', $producto);
+
+    }
+
+    public function delProveedor(Producto $producto, Request $request) {
+        $producto->proveedores()->detach($request->get('proveedor_id'));
+        return redirect()->route('productos.show', $producto);
     }
 }

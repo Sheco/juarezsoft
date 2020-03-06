@@ -15,7 +15,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label><b>Precio</b></label>
-                <div>{{$obj->precio}}</div>
+                <div>{{number_format($obj->precio, 2)}}</div>
             </div>
             <div class="form-group col-md-6">
                 <label><b>Abasto</b></label>
@@ -41,7 +41,28 @@
     <div class="card mt-3">
         <div class="card-header">Proveedores</div>
         <div class="card-body">
-            TODO
+            <a href="{{ route("productos.addProveedor", $obj) }}" class="btn btn-success">Agregar proveedor</a>
+            <table class="table table-bordered table-striped mt-3">
+                <thead><tr>
+                    <th>Nombre</th>
+                    <th class="text-right">Precio de compra</th>
+                    <th></th>
+                </tr></thead>
+                @foreach ($obj->proveedores as $proveedor)
+                <tr>
+                    <td>{{ $proveedor->nombre }}</td>
+                    <td align="right">${{ number_format($proveedor->pivot->precio, 2) }}</td>
+                    <td>
+                        <form method="post" action="{{ route('productos.delProveedor', $obj) }}">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="proveedor_id" value="{{ $proveedor->id }}">
+                            <input type="submit" value="Borrar" class="btn btn-danger">
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </table>
         </div>
     </div>
 

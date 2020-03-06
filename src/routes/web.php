@@ -46,5 +46,14 @@ Route::group(['middleware' => ['can:administrar usuarios']], function() {
 });
 
 Route::group(['middleware' => ['can:administrar inventario']], function() {
+    Route::get('productos/{producto}/proveedores', 'ProductosController@proveedores')
+        ->name('productos.proveedores');
+    Route::get('productos/{producto}/addProveedor', 'ProductosController@addProveedor')
+        ->name('productos.addProveedor');
+    Route::post('productos/{producto}/addProveedor', 'ProductosController@storeProveedor')
+        ->name('productos.storeProveedor');
+    Route::delete('productos/{producto}/delProveedor', 'ProductosController@delProveedor')
+        ->name('productos.delProveedor');
+
     Route::resource('productos', 'ProductosController');
 });
