@@ -90,6 +90,11 @@
                             </a>
                         </li>
                         @endcan
+                        @can('administrar inventario')
+                        <li class="nav-item list-group-item">
+                            <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
+                        </li>
+                        @endcan
                     </div>
                 </div>
             </div>

@@ -45,3 +45,6 @@ Route::group(['middleware' => ['can:administrar usuarios']], function() {
         ->name('ventas.ver');
 });
 
+Route::group(['middleware' => ['can:administrar inventario']], function() {
+    Route::resource('productos', 'ProductosController');
+});
