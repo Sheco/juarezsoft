@@ -128,6 +128,7 @@ class Venta extends Model
             ->join('productos', 'productos.id', '=', 'venta_productos.producto_id')
             ->join('ventas', 'ventas.id', '=', 'venta_productos.venta_id')
             ->select(
+                'productos.id',
                 'productos.nombre', 
                 'productos.stock',
                 DB::raw('sum(cantidad) as vendidos'),

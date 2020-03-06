@@ -36,7 +36,7 @@
                     </thead>
                     @foreach ($inventario as $producto)
                         <tr>
-                            <td>{{$producto->nombre}}</td>
+                            <td><a href="{{ route("productos.show", $producto->id) }}">{{$producto->nombre}}</a></td>
                             <td align="right">{{number_format($producto->vendidos,0)}}</td>
                             <td align="right">{{number_format($producto->stock, 0)}}</td>
                         </tr>
