@@ -54,6 +54,13 @@ Route::group(['middleware' => ['can:administrar inventario']], function() {
         ->name('productos.storeProveedor');
     Route::delete('productos/{producto}/delProveedor', 'ProductosController@delProveedor')
         ->name('productos.delProveedor');
+    Route::get('productos/{producto}/comprar/{proveedor}', 'ProductosController@comprar')
+        ->name('productos.comprar');
+    Route::post('productos/{producto}/comprar/{proveedor}', 'ProductosController@comprarGuardar')
+        ->name('productos.comprarGuardar');
+
+    Route::get('solicitudescompra/{solicitud}', 'SolicitudesCompraController@show')
+        ->name('solicitudescompra.show');
 
     Route::resource('productos', 'ProductosController');
 });

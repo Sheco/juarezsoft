@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Producto;
 use App\Departamento;
 use App\Proveedor;
+use App\SolicitudCompra;
 use Carbon\Carbon;
 
 class ProductosController extends Controller
@@ -153,5 +154,19 @@ class ProductosController extends Controller
     public function delProveedor(Producto $producto, Request $request) {
         $producto->proveedores()->detach($request->get('proveedor_id'));
         return redirect()->route('productos.show', $producto);
+    }
+
+    public function comprar(Producto $producto, Proveedor $proveedor) {
+        return view('productos.comprar', compact('producto', 'proveedor'));
+    }
+
+    public function comprarGuardar(Producto $producto, Proveedor $proveedor, Request $request) {
+        $cantidad = $request->get('cantidad');
+        $solicitud = SolicitudCompra::crear(
+            $proveedor,
+            $producto,
+            $cantidad
+        );
+        return redirect()->route('solicitudescompra.show', $solicitud);
     }
 }

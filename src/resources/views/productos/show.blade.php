@@ -53,6 +53,10 @@
                     <td>{{ $proveedor->nombre }}</td>
                     <td align="right">${{ number_format($proveedor->pivot->precio, 2) }}</td>
                     <td>
+                        <a href="{{ route('productos.comprar', [ 
+                            $obj,
+                            $proveedor
+                        ]) }}" class="btn btn-info text-light" style="float: left; margin-right: 1em;">Comprar</a>
                         <form method="post" action="{{ route('productos.delProveedor', $obj) }}">
                             @csrf
                             @method('DELETE')
