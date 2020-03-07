@@ -45,8 +45,8 @@ class SolicitudesCompraTableSeeder extends Seeder
                 $solicitud->fecha_pago = $fecha_pago;
                 $solicitud->save();
 
-                $solicitud->entregada();
-                $solicitud->fecha_entregada = $fecha_entrega;
+                $solicitud->surtida();
+                $solicitud->fecha_surtida = $fecha_entrega;
                 $solicitud->save();
             }
         });

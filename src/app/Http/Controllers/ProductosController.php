@@ -70,8 +70,6 @@ class ProductosController extends Controller
         $stats = $producto->estadisticas($fecha_inicio, $fecha_final);
         $fechas = $stats->keys();
 
-
-
         return view('productos.show', [
             'obj'=>$producto,
             'vendidos'=>$stats->map(function($row) {

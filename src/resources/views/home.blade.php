@@ -99,6 +99,9 @@
                         <li class="nav-item list-group-item">
                             <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
                         </li>
+                        <li class="nav-item list-group-item">
+                            <a class="nav-link" href="{{ route('solicitudescompra.index') }}">Solicitudes de compra</a>
+                        </li>
                         @endcan
                     </div>
                 </div>

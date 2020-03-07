@@ -48,7 +48,7 @@
                     <th class="text-right">Precio de compra</th>
                     <th></th>
                 </tr></thead>
-                @foreach ($obj->proveedores as $proveedor)
+                @foreach ($obj->proveedores->sortBy('pivot.precio') as $proveedor)
                 <tr>
                     <td>{{ $proveedor->nombre }}</td>
                     <td align="right">${{ number_format($proveedor->pivot->precio, 2) }}</td>

@@ -20,6 +20,14 @@ class SolicitudCompra extends Model
         return $this->belongsTo('App\Proveedor');
     }
 
+    public function precio() {
+        return $this->producto
+                    ->proveedores
+                    ->find($this->proveedor_id)
+                    ->pivot
+                    ->precio;
+    }
+
     static function crear(Proveedor $proveedor, Producto $producto, $cantidad) {
         return self::create([
             'proveedor_id'=>$proveedor->id,
@@ -31,16 +39,24 @@ class SolicitudCompra extends Model
 
     public function pagar() {
         $this->fecha_pago = Carbon::now();
+        $this->status = 'pagada';
         $this->save();
     }
 
-    public function entregada() {
+    public function surtida() {
         DB::transaction(function() {
-            $this->fecha_entregada = Carbon::now();
+            $this->fecha_surtida = Carbon::now();
+            $this->status = 'surtida';
             $this->save();
 
             $this->producto->stock += $this->cantidad;
             $this->producto->save();
         });
     }
+
+    public function cancelar() {
+        $this->status = "cancelada";
+        $this->save();
+    }
+
 }

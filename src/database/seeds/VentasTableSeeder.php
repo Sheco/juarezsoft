@@ -136,7 +136,7 @@ class VentasTableSeeder extends Seeder
 
             while($total<$compraMinima) {
                 $producto = $obtenerProducto(rand(0, 100));
-                $cantidad = min(rand(1, 3), $producto->stock);
+                $cantidad = rand(1, 3);
                 $total += $producto->precio * $cantidad;
 
                 $venta_productos[] = [ $producto->id, $cantidad ];    

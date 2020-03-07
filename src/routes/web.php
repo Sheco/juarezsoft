@@ -59,8 +59,20 @@ Route::group(['middleware' => ['can:administrar inventario']], function() {
     Route::post('productos/{producto}/comprar/{proveedor}', 'ProductosController@comprarGuardar')
         ->name('productos.comprarGuardar');
 
+    Route::get('solicitudescompra', 'SolicitudesCompraController@index')
+        ->name('solicitudescompra.index');
+
+    Route::get('solicitudescompra/status/{status}', 'SolicitudesCompraController@index')
+        ->name('solicitudescompra.index.status');
+
     Route::get('solicitudescompra/{solicitud}', 'SolicitudesCompraController@show')
         ->name('solicitudescompra.show');
+    Route::get('solicitudescompra/{solicitud}/pagada', 'SolicitudesCompraController@pagada')
+        ->name('solicitudescompra.pagada');
+    Route::get('solicitudescompra/{solicitud}/cancelar', 'SolicitudesCompraController@cancelar')
+        ->name('solicitudescompra.cancelar');
+    Route::get('solicitudescompra/{solicitud}/surtida', 'SolicitudesCompraController@surtida')
+        ->name('solicitudescompra.surtida');
 
     Route::resource('productos', 'ProductosController');
 });
