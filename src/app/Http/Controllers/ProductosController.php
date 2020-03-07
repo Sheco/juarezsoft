@@ -159,6 +159,7 @@ class ProductosController extends Controller
     }
 
     public function comprar(Producto $producto, Proveedor $proveedor) {
+        $proveedor = $producto->proveedores->find($proveedor->id);
         return view('productos.comprar', compact('producto', 'proveedor'));
     }
 

@@ -12,16 +12,29 @@
                 Crear una solicitud de compra de <b>{{$producto->nombre}}</b> del proveedor <b>{{ $proveedor->nombre }}</b>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" name="cantidad" id="cantidad" class="form-control">
+                    <label for="cantidad"><b>Cantidad</b></label>
+                    <input type="number" name="cantidad" id="cantidad" class="form-control" onchange="calculate(this)">
                 </div>
 
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-6">
+                    <label for="total"><b>Total</b></label>
+                    <div id="total">$0.00</div>
+                </div>
+
+                <div class="form-group col-md-3">
                     <label>&nbsp;</label>
-                    <input type="submit" value="Comprar" class="btn btn-primary form-control">
+                    <input type="submit" value="Crear solicitud de compra" class="btn btn-primary form-control">
                 </div>
             </div></div></div>
         </div>
     </div>
     </form>
+<script>
+    let precio = {{ $proveedor->pivot->precio }}
+    function calculate(input) {
+        let totalField = document.getElementById('total')
+        totalField.innerHTML = '$'+ Intl.NumberFormat().format(precio*input.value)
+    }
+    calculate(document.getElementById('cantidad'))
+</script>
 @endsection
