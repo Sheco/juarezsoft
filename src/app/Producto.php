@@ -30,6 +30,7 @@ class Producto extends Model
             ->select(
                 'ventas.fecha',
                 DB::raw('sum(cantidad) as vendidos'),
+                DB::raw('sum(cantidad*venta_productos.precio) as total')
                 )
             ->where('productos.id', $this->id)
             ->whereBetween('fecha', [
@@ -55,6 +56,7 @@ class Producto extends Model
                 $data[$fecha] = json_decode(json_encode([
                     "fecha" => $fecha,
                     "vendidos" => "0",
+                    "total"=>0,
                 ])); 
             }
         }

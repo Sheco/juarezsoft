@@ -88,10 +88,16 @@
                 labels: {!! json_encode($fechas) !!},
                 datasets: [{
                     label: 'Unidades vendidas',
+                    yAxisID: 'unidades',
+                    fill: false,
+                    data: {!! json_encode($vendidos) !!}
+                },{
+                    label: 'Total',
+                    yAxisID: 'total',
                     backgroundColor: 'rgb(54, 162, 235)',
                     borderColor: 'rgb(54, 162, 235)',
                     fill: false,
-                    data: {!! json_encode($vendidos) !!}
+                    data: {!! json_encode($total) !!}
                 }]
             },
             options: {
@@ -113,11 +119,18 @@
                         }
                     }],
                     yAxes: [{
-                        display: true,
-                        scaleLabel: { 
-                            display: true,
-                            labelString: 'Unidades'
+                        id: 'total',
+                        position: 'left',
+                        type: 'linear',
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return '$'+ Intl.NumberFormat().format((value))
+                            }
                         }
+                    }, {
+                        id: 'unidades',
+                        position: 'right',
+                        type: 'linear',
                     }]
                 }
             }

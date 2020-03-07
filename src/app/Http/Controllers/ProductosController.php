@@ -70,14 +70,16 @@ class ProductosController extends Controller
         $stats = $producto->estadisticas($fecha_inicio, $fecha_final);
         $fechas = $stats->keys();
 
-        $vendidos = $stats->map(function($row) { 
-                return intval($row->vendidos); 
-            })->values();
 
 
         return view('productos.show', [
             'obj'=>$producto,
-            'vendidos'=>$vendidos,
+            'vendidos'=>$stats->map(function($row) {
+                return intval($row->vendidos); 
+            })->values(),
+            'total'=>$stats->map(function($row) {
+                return intval($row->total);
+            })->values(),
             'fechas'=>$fechas,
         ]);
     }
