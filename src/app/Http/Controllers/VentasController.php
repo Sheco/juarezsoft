@@ -44,10 +44,11 @@ class VentasController extends Controller
 
     function vendedores(Request $request) {
         $fecha_inicio = $request->input('fecha_inicio', date('Y-m-d'));
+        $fecha_final = $request->input('fecha_final', date('Y-m-d'));
 
-        $datos = Venta::reporteVendedores($fecha_inicio);
+        $datos = Venta::reporteVendedores($fecha_inicio, $fecha_final);
         return view('ventas.vendedores', compact(
-            'fecha_inicio', 'datos'
+            'fecha_inicio', 'fecha_final', 'datos'
         ));
     }
 

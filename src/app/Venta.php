@@ -140,12 +140,8 @@ class Venta extends Model
             ->get();
     }
 
-    public static function reporteVendedores($fecha) {
-        if(!$fecha) return collect([]);
-
-        $fecha = new Carbon($fecha);
-        $inicio = $fecha->clone()->startOfMonth()->format('Y-m-d');
-        $fin = $fecha->clone()->endOfMonth()->format('Y-m-d');
+    public static function reporteVendedores($fecha_inicio, $fecha_final) {
+        if(!$fecha_inicio || !$fecha_final) return collect([]);
 
         return DB::table('ventas')
             ->join('users', 'users.id', '=', 'ventas.user_id')
@@ -155,7 +151,7 @@ class Venta extends Model
             )
             ->groupBy('users.name')
             ->orderByRaw('sum(total) desc')
-            ->whereBetween('fecha', [ $inicio, $fin])
+            ->whereBetween('fecha', [ $fecha_inicio, $fecha_final])
             ->get();
     }
 

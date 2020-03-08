@@ -10,10 +10,15 @@
           <form method="get" action="{{ route('ventas.vendedores') }}">
 
             <div class="form-group">
-              <label for="fecha_inicio">Fecha:</label>
+              <label for="fecha_inicio">Fecha de inicio</label>
               <input type="date" name="fecha_inicio" id="fecha_inicio" 
                 value="{{ $fecha_inicio }}" class="form-control">
-            <small>Seleccionar cualquier día del mes a reportar</small>
+            </div>
+
+            <div class="form-group">
+              <label for="fecha_final">Fecha final</label>
+              <input type="date" name="fecha_final" id="fecha_final" 
+                value="{{ $fecha_final }}" class="form-control">
             </div>
 
             <input type="submit" value="Aplicar" class="btn btn-primary">
