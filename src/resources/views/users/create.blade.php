@@ -1,8 +1,7 @@
 @extends ('layouts.app')
 @section('content')
 <div class="container">
-    <form method="post" action="{{route('users.store')}}">
-    @csrf
+    {{ Form::model($obj, ['route'=>'users.store']) }}
     <div class="card">
         <div class="card-header">Crear un nuevo usuario</div>
         <div class="card-body">
@@ -18,6 +17,6 @@
             </div>
         </div>
     </div>
-    </form>
+    {{ Form::close() }}
 </div>
 @endsection

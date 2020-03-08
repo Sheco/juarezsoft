@@ -1,9 +1,8 @@
 @extends ('layouts.app')
 @section('content')
 <div class="container">
-    <form method="POST" action="{{route('users.update', [$obj->id])}}">
-        @method('PUT')
-        @csrf
+    {{ Form::model($obj, ['route'=>['users.update', $obj->id]]) }}
+    @method('PUT')
     <div class="card">
         <div class="card-header">Crear un nuevo usuario</div>
         <div class="card-body">
@@ -36,7 +35,7 @@
 
         </div>
     </div>
-    </form>
+    {{ Form::close() }}
     
     <div class="card mt-3">
         <div class="card-header bg-danger text-light">Eliminar usuario</div>
