@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="name">Nombre:</label>
     <input type="text" name="name" id="name" 
-         class="form-control" value="{{$obj->name}}">
+         class="form-control" value="{{$obj->name}}" autofocus>
 </div>
 
 <div class="form-group">

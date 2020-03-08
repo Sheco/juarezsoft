@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="cantidad"><b>Cantidad</b></label>
-                    <input type="number" name="cantidad" id="cantidad" class="form-control" onchange="calculate(this)" onkeyup="calculate(this)">
+                    <input type="number" name="cantidad" id="cantidad" class="form-control" onchange="calculate(this)" onkeyup="calculate(this)" autofocus>
                 </div>
 
                 <div class="form-group col-md-6">

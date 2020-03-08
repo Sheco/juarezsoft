@@ -4,7 +4,7 @@
 
 <div class="form-group col-md-6">
     <label for="nombre">Nombre:</label>
-    {{ Form::text('nombre', null, ['class'=>'form-control']) }}
+    {{ Form::text('nombre', null, ['class'=>'form-control', 'autofocus']) }}
 </div>
 
 <div class="form-group col-md-6">
