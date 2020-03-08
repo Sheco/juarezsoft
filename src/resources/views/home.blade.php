@@ -20,8 +20,8 @@
         </div>
 
     </div>
-    @if ($inventario->count())
     <div class="row mt-3">
+    @if ($inventario->count())
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Productos agotandose</div>
@@ -46,64 +46,44 @@
                 </div>
             </div>
         </div>
-    </div>
     @endif
 
-    <div class="row mt-3">
-        <div class="col-md-4 mt-3">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Reportes de Ventas</div>
-                <div class="card-body">
-                    <div class="nav flex-column list-group">
-                        @can('ver reportes')
-                        <li class="nav-item list-group-item">
-                            <a class="nav-link" href="{{ route('ventas.diarias') }}">
-                                Ventas diarias
-                            </a>
-                        </li>
-                        <li class="nav-item list-group-item">
-                            <a class="nav-link" href="{{ route('ventas.productos') }}">
-                                Ventas por producto
-                            </a>
-                        </li>
-                        <li class="nav-item list-group-item">
-                            <a class="nav-link" href="{{ route('ventas.vendedores') }}">
-                                Ventas por vendedor
-                            </a>
-                        </li>
-                        @endcan
-                    </div>
+                <div class="card-body nav flex-column list-group">
+                    @can('ver reportes')
+                        <a class="nav-link" href="{{ route('ventas.diarias') }}">
+                            Ventas diarias
+                        </a>
+                        <a class="nav-link" href="{{ route('ventas.productos') }}">
+                            Ventas por producto
+                        </a>
+                        <a class="nav-link" href="{{ route('ventas.vendedores') }}">
+                            Ventas por vendedor
+                        </a>
+                    @endcan
                 </div>
             </div>
         </div>
 
         @can('ver administración')
-        <div class="col-md-4 mt-3">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Administración</div>
-                <div class="card-body">
-                    <div class="nav flex-column list-group">
+                <div class="card-body nav flex-column list-column">
                         @can('administrar usuarios')
-                        <li class="nav item list-group-item">
                             <a class="nav-link" href="{{ route('users.index') }}">
                                 Usuarios
                             </a>
-                        </li>
-                        <li class="nav item list-group-item">
                             <a class="nav-link" href="{{ route('users.nomina') }}">
                                 Nómina
                             </a>
-                        </li>
                         @endcan
                         @can('administrar inventario')
-                        <li class="nav-item list-group-item">
                             <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
-                        </li>
-                        <li class="nav-item list-group-item">
                             <a class="nav-link" href="{{ route('solicitudescompra.index') }}">Solicitudes de compra</a>
-                        </li>
                         @endcan
-                    </div>
                 </div>
             </div>
         </div>
