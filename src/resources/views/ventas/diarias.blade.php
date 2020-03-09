@@ -25,26 +25,63 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="col-md-3">
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          @foreach ($datos as $dato)
-            <tr>
-              <td>{{ (new Carbon\Carbon($dato->fecha))->format('Y-M-d') }}</td>
-              <td align="right">${{ number_format($dato->total, 2) }}</td>
-            </tr>
-          @endforeach
-        </table>
-
+    <div class="row">
+      <div class="col-md-12">
+          <canvas id="ventas"></canvas>
       </div>
     </div>
   </div>
 </div>
+<script>
+    window.onload = function() {
+        window.stats = new Chart(
+            document.getElementById('ventas').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($fechas) !!},
+                datasets: [{
+                    label: 'Total',
+                    yAxisID: 'total',
+                    backgroundColor: 'rgb(54, 162, 235)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false,
+                    data: {!! json_encode($totales) !!}
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: { 
+                            display: true,
+                            labelString: 'Fecha'
+                        }
+                    }],
+                    yAxes: [{
+                        id: 'total',
+                        position: 'left',
+                        type: 'linear',
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return '$'+ Intl.NumberFormat().format((value))
+                            }
+                        }
+                    }]
+                }
+            }
+        })
+    }
+</script>
 @endsection
 

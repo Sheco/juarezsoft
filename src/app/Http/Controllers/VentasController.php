@@ -16,8 +16,12 @@ class VentasController extends Controller
         $fecha_inicio = $request->input('fecha_inicio', $now->clone()->startOfMonth()->format('Y-m-d'));
         $fecha_final = $request->input('fecha_final', $now->clone()->endOfMonth()->format('Y-m-d'));
         $datos = Venta::reporteDiario($fecha_inicio, $fecha_final);
+
+        $fechas = $datos->map(function($x) { return $x->fecha; });
+        $totales = $datos->map(function($x) { return $x->total; });
+
         return view('ventas.diarias', compact(
-            'fecha_inicio', 'fecha_final', 'datos'
+            'fecha_inicio', 'fecha_final', 'fechas', 'totales'
         ));
     }
 
