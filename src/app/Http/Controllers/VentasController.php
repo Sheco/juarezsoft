@@ -13,8 +13,8 @@ class VentasController extends Controller
     function diarias(Request $request) {
         $now = Carbon::now();
 
-        $fecha_inicio = $request->input('fecha_inicio', $now->clone()->startOfMonth()->format('Y-m-d'));
-        $fecha_final = $request->input('fecha_final', $now->clone()->endOfMonth()->format('Y-m-d'));
+        $fecha_inicio = $request->input('fecha_inicio', $now->clone()->subtract(1, 'month')->format('Y-m-d'));
+        $fecha_final = $request->input('fecha_final', $now->format('Y-m-d'));
         $datos = Venta::reporteDiario($fecha_inicio, $fecha_final);
 
         $fechas = $datos->map(function($x) { return $x->fecha; });
