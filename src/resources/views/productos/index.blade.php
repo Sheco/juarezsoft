@@ -8,6 +8,7 @@
 <table class="table table-bordered table-striped table-hover mt-3">
 <thead>
     <tr>
+        <th>Departamento</th>
         <th>Código</th>
         <th>Nombre</th>
         <th>Precio</th>
@@ -16,6 +17,7 @@
 </thead>
 @foreach ($datos as $obj) 
     <tr>
+        <td>{{$obj->departamento->nombre}}</td>
         <td><a href="{{ route('productos.show', [$obj->id]) }}">
                 {{$obj->codigo}}</a></td>
         <td>{{$obj->nombre}}</td>

@@ -19,7 +19,9 @@ class ProductosController extends Controller
     public function index()
     {
         return view('productos.index', [
-            'datos' => Producto::all()
+            'datos' => Producto::with(['departamento'=>function($query) {
+                $query->orderBy('nombre');
+            }])->get()
         ]);
     }
 
