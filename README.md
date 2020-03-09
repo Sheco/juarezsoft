@@ -111,6 +111,17 @@ Dependiendo de cómo se haya publicado la aplicación web, ahora ya podremos ent
     - producto_id
     - cantidad
 
+- facturas
+    - id
+    - venta_id
+    - status (normal, cancelada)
+    - rfc
+    - nombre
+    - direccion
+    - codigopostal
+    - telefono
+    - email
+    
 # Tareas
 
 - Migraciónes de la estructura de la base de datos
