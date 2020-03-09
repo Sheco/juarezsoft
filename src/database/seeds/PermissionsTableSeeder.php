@@ -25,16 +25,19 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo($adminUsers);
         $adminInv = Permission::create(['name'=>'administrar inventario']);
         $role->givePermissionTo($adminInv);
+        $facturar = Permission::create(['name'=>'facturar']);
+        $role->givePermissionTo($facturar);
 
-        Role::create([
+        $role = Role::create([
             'name'=>'gerente',
             'sueldo'=>35000
         ]);
-        Role::create([
+        $role = Role::create([
             'name'=>'subgerente',
             'sueldo'=>22000
         ]);
-        Role::create([
+        $role->givePermissionTo($facturar);
+        $role = Role::create([
             'name'=>'jefe de piso',
             'sueldo'=>15000
         ]);
