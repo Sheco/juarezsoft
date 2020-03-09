@@ -21,6 +21,7 @@
 
     </div>
     <div class="row mt-3">
+    @can('administrar inventario')
     @if ($inventario->count())
         <div class="col-md-4">
             <div class="card">
@@ -47,12 +48,13 @@
             </div>
         </div>
     @endif
+    @endcan
 
+    @can('ver reportes')
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Reportes de Ventas</div>
                 <div class="card-body nav flex-column list-group">
-                    @can('ver reportes')
                         <a class="nav-link" href="{{ route('ventas.diarias') }}">
                             Ventas diarias
                         </a>
@@ -62,12 +64,12 @@
                         <a class="nav-link" href="{{ route('ventas.vendedores') }}">
                             Ventas por vendedor
                         </a>
-                    @endcan
                 </div>
             </div>
         </div>
+    @endcan
 
-        @can('ver administración')
+    @can('ver administración')
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Administración</div>
@@ -87,7 +89,7 @@
                 </div>
             </div>
         </div>
-        @endcan
+    @endcan
 
     </div>
 </div>
