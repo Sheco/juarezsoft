@@ -64,13 +64,13 @@ class ProductosTableSeeder extends Seeder
                 [ "nombre"=>"Reloj para dama", "codigo"=>"relojdama", "precio"=>2500, "departamento_id"=>7, 'frecuenciaCompras'=> 60],
                 [ "nombre"=>"Apple Watch", "codigo"=>'applewatch', 'precio'=>12000, 'departamento_id'=>7, 'frecuenciaCompras'=>50],
 
-                [ "nombre"=>"Consola XBox One S", "codigo"=>"xboxonex", "precio"=>8000, "departamento_id"=>7, 'frecuenciaCompras'=> 50],
-                [ "nombre"=>"Consola Nintendo Switch", "codigo"=>"nintendoswitch", "precio"=>6000, "departamento_id"=>7, 'frecuenciaCompras'=> 50],
-                [ "nombre"=>"Consola Playstation 4", "codigo"=>"playstation4", "precio"=>8000, "departamento_id"=>7, 'frecuenciaCompras'=> 50],
+                [ "nombre"=>"Consola XBox One S", "codigo"=>"xboxonex", "precio"=>8000, "departamento_id"=>8, 'frecuenciaCompras'=> 50],
+                [ "nombre"=>"Consola Nintendo Switch", "codigo"=>"nintendoswitch", "precio"=>6000, "departamento_id"=>8, 'frecuenciaCompras'=> 50],
+                [ "nombre"=>"Consola Playstation 4", "codigo"=>"playstation4", "precio"=>8000, "departamento_id"=>8, 'frecuenciaCompras'=> 50],
 
-                [ "nombre"=>"Libro Harry Potter 1", "codigo"=>"libroharrypotter1", "precio"=>400, "departamento_id"=>8, 'frecuenciaCompras'=> 30],
-                [ "nombre"=>"Película Harry Potter 1", "codigo"=>"peliculaharrypotter1", "precio"=>600, "departamento_id"=>8, 'frecuenciaCompras'=> 30],
-                [ "nombre"=>"Musica de Harry Potter 1", "codigo"=>"musicaharrypotter1", "precio"=>300, "departamento_id"=>8, 'frecuenciaCompras'=> 30],
+                [ "nombre"=>"Libro Harry Potter 1", "codigo"=>"libroharrypotter1", "precio"=>400, "departamento_id"=>9, 'frecuenciaCompras'=> 30],
+                [ "nombre"=>"Película Harry Potter 1", "codigo"=>"peliculaharrypotter1", "precio"=>600, "departamento_id"=>9, 'frecuenciaCompras'=> 30],
+                [ "nombre"=>"Musica de Harry Potter 1", "codigo"=>"musicaharrypotter1", "precio"=>300, "departamento_id"=>9, 'frecuenciaCompras'=> 30],
             ];
 
             foreach($productos as $producto) {
