@@ -106,7 +106,7 @@ class Venta extends Model
             ->select('ventas.fecha', 
                 DB::raw('sum(cantidad) as cantidad'),
                 'productos.nombre', 
-                DB::raw('sum(productos.precio*cantidad) as total'))
+                DB::raw('sum(venta_productos.precio*cantidad) as total'))
             ->groupBy('fecha', 'productos.id')
             ->whereBetween('fecha', [ $fecha_inicio, $fecha_final ]);
 
