@@ -17,7 +17,7 @@ class VentasTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->poblaMesAleatoriamente(Carbon::now()->format('Y-m-d'), 5);
+        $this->poblaMesAleatoriamente(Carbon::now()->format('Y-m-d'), 10);
     }
 
     /**
