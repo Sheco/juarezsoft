@@ -17,6 +17,7 @@
                 <th>ID</th>
                 <th>Producto</th>
                 <th>Proveedor</th>
+                <th>Fecha</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Total</th>
@@ -26,6 +27,7 @@
                 <td><a href="{{route('solicitudescompra.show', $row)}}">{{$row->id}}</a></td>
                 <td>{{$row->producto->nombre}}</td>
                 <td>{{$row->proveedor->nombre}}</td>
+                <td>{{$row->$columnaFecha}}</td>
                 <td align="right">{{number_format($row->cantidad, 0)}}</td>
                 <td align="right">${{number_format($row->precio(), 2)}}</td>
                 <td align="right">${{number_format($row->cantidad*$row->precio(), 2)}}</td>

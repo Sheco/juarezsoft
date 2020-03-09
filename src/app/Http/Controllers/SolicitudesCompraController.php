@@ -9,8 +9,21 @@ class SolicitudesCompraController extends Controller
 {
     function index($status='nueva') {
         $statuses = ['nueva', 'pagada', 'surtida', 'cancelada'];
-        $lista = SolicitudCompra::where('status', $status)->get();
-        return view('solicitudescompra.index', compact('statuses', 'status', 'lista')); 
+
+        $ordenes = [ 
+            'nueva'=>'created_at',
+            'pagada'=>'fecha_pago',
+            'surtida'=>'fecha_surtida',
+            'cancelada'=>'created_at'
+        ];
+
+        $columnaFecha = $ordenes[$status];
+        $lista = SolicitudCompra::where('status', $status)
+            ->orderBy($columnaFecha, 'desc')
+            ->get();
+        return view('solicitudescompra.index', compact(
+            'statuses', 'status', 'lista', 'columnaFecha'
+        )); 
     }
 
     function show(SolicitudCompra $solicitud) {
