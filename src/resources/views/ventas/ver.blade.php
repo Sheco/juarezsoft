@@ -103,7 +103,8 @@
                     </div>
                 </form>
                 @else
-                    Esta venta ya esta facturada
+                    <p>Esta venta ya esta facturada.</p> 
+                    <a target="_blank" href="{{ route('ventas.factura', $venta) }}" class="btn btn-primary">Ver/Imprimir factura</a>
                 @endif
 
             </div>

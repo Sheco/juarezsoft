@@ -103,6 +103,11 @@ class VentasController extends Controller
             'email'=>'required']);
 
         $venta->facturar($request->all());
-        return redirect()->route('ventas.buscar');
+        return redirect()->route('ventas.ver', $venta);
+    }
+
+    function factura(Venta $venta) {
+        $factura = $venta->factura;
+        return view("ventas.factura", compact('venta', 'factura'));
     }
 }

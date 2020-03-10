@@ -163,6 +163,14 @@ class Venta extends Model
         return $factura;
     }
 
+    public function facturas() {
+        return $this->hasMany('App\Factura');
+    }
+
+    function getFacturaAttribute() {
+        return $this->facturas->where('status', 'normal')->first();
+    }
+
     function estaFacturada() {
         return Factura::where('venta_id', $this->id)
             ->where('status', 'normal')

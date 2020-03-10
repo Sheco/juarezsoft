@@ -100,5 +100,7 @@ Route::prefix('ventas')
         ->name('ventas.facturar');
     Route::get('ver/{venta}', 'VentasController@ver')
         ->name('ventas.ver');
+    Route::get('factura/{venta}', 'VentasController@factura')
+        ->name('ventas.factura');
 });
 
