@@ -170,6 +170,6 @@ class ProductosController extends Controller
             $producto,
             $cantidad
         );
-        return redirect()->route('solicitudescompra.show', $solicitud);
+        return redirect()->route('solicitudescompra.index');
     }
 }
