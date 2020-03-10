@@ -5,7 +5,7 @@
         <form method="post" action="{{ route('puntodeventa.agregar') }}" class="form-inline" id="formaBuscar">
             @csrf
                 <div class="input-group">
-                    <input type="text" name="codigo" id="codigo" class="form-control" placeholder="Código de producto" autofocus> 
+                    <input type="text" name="codigo" id="codigo" class="form-control" placeholder="Código de producto" autofocus autocomplete="off"> 
                     <div class="input-group-append">
                         <input type="submit" value="Agregar" class="btn btn-success">
                     </div>
