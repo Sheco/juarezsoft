@@ -76,3 +76,17 @@ Route::group(['middleware' => ['can:administrar inventario']], function() {
 
     Route::resource('productos', 'ProductosController');
 });
+
+
+Route::prefix('pdv')->middleware(['can:vender'])->group(function()  {
+    Route::get('/', 'PuntoDeVentaController@index')
+        ->name('puntodeventa.index');
+    Route::get('sesion', 'PuntoDeVentaController@sesion')
+        ->name('puntodeventa.sesion');
+    Route::post('agregar', 'PuntoDeVentaController@agregar')
+        ->name('puntodeventa.agregar');
+    Route::get('limpiar', 'PuntoDeVentaController@limpiar')
+        ->name('puntodeventa.limpiar');
+    Route::post('guardar', 'PuntoDeVentaController@guardar')
+        ->name('puntodeventa.guardar');
+});

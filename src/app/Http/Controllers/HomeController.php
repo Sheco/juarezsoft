@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Venta;
 
 class HomeController extends Controller
@@ -24,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->hasRole('vendedor'))
+            return redirect()->route('puntodeventa');
         $inventario = Venta::reporteInventario();
         return view('home', compact('inventario'));
     }

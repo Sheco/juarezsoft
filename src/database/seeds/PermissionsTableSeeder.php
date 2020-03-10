@@ -27,6 +27,8 @@ class PermissionsTableSeeder extends Seeder
         $role->givePermissionTo($adminInv);
         $facturar = Permission::create(['name'=>'facturar']);
         $role->givePermissionTo($facturar);
+        $vender = Permission::create(['name'=>'vender']);
+        $role->givePermissionTo($vender);
 
         $role = Role::create([
             'name'=>'gerente',
@@ -45,7 +47,6 @@ class PermissionsTableSeeder extends Seeder
             'name'=>'vendedor',
             'sueldo'=>5000
           ]);
-        $vender = Permission::create(['name'=>'vender']);
         $role->givePermissionTo($vender);
     }
 }
