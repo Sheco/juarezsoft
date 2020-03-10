@@ -57,6 +57,6 @@ class PuntoDeVentaController extends Controller
         }
         $venta = Venta::crear(Auth::user(), $sesion->toArray());
         $request->session()->put("puntodeventa", []);
-        return redirect()->route("puntodeventa.venta", $venta);
+        return redirect()->route("ventas.ver", $venta);
     }
 }

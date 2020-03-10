@@ -89,4 +89,6 @@ Route::prefix('pdv')->middleware(['can:vender'])->group(function()  {
         ->name('puntodeventa.limpiar');
     Route::post('guardar', 'PuntoDeVentaController@guardar')
         ->name('puntodeventa.guardar');
+    Route::get('venta/{venta}', 'VentasController@ver')
+        ->name('ventas.ver');
 });
