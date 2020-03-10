@@ -40,9 +40,6 @@ Route::group(['middleware' => ['can:administrar usuarios']], function() {
         ->name('users.ventas');        
 
     Route::resource('/users', 'UsersController');
-
-    Route::get('/ventas/{venta}', 'VentasController@ver')
-        ->name('ventas.ver');
 });
 
 Route::group(['middleware' => ['can:administrar inventario']], function() {
@@ -89,6 +86,19 @@ Route::prefix('pdv')->middleware(['can:vender'])->group(function()  {
         ->name('puntodeventa.limpiar');
     Route::post('guardar', 'PuntoDeVentaController@guardar')
         ->name('puntodeventa.guardar');
-    Route::get('venta/{venta}', 'VentasController@ver')
+    Route::get('recibo/{venta}', 'PuntoDeVentaController@recibo')
+        ->name('puntodeventa.recibo');
+});
+
+Route::prefix('ventas')
+    ->middleware(['can:facturar'])->group(function() {
+    Route::get('buscar', 'VentasController@buscar')
+        ->name('ventas.buscar');
+    Route::post('buscar',  'VentasController@buscarReal')
+        ->name('ventas.buscarReal');
+    Route::post('facturar/{venta}', 'VentasController@facturar')
+        ->name('ventas.facturar');
+    Route::get('ver/{venta}', 'VentasController@ver')
         ->name('ventas.ver');
 });
+

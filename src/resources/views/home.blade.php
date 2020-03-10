@@ -86,6 +86,9 @@
                             <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
                             <a class="nav-link" href="{{ route('solicitudescompra.index') }}">Solicitudes de compra</a>
                         @endcan
+                        @can('facturar')
+                            <a class="nav-link" href="{{ route('ventas.buscar') }}">Facturar</a>
+                        @endcan
                 </div>
             </div>
         </div>

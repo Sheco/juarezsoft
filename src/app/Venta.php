@@ -155,4 +155,17 @@ class Venta extends Model
             ->get();
     }
 
+    function facturar($datos) {
+        $datos["venta_id"] = $this->id;
+        $datos["status"] = "normal";
+        $factura = Factura::create($datos);
+        $factura->save();
+        return $factura;
+    }
+
+    function estaFacturada() {
+        return Factura::where('venta_id', $this->id)
+            ->where('status', 'normal')
+            ->count()>0;
+    }
 }
