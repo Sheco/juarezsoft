@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Venta;
 use App\Producto;
+use App\Factura;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -58,5 +59,55 @@ class VentasController extends Controller
 
     function ver(Venta $venta) {
         return view('ventas.ver', compact('venta'));
+    }
+
+    function buscar(Request $request) {
+        $id = $request->get('id', '');
+        $fecha = $request->get('fecha', '');
+        $total = $request->get('total', '');
+        return view('ventas.buscar', compact('id', 'fecha', 'total'));
+    }
+
+    function buscarReal(Request $request) {
+        $request->validate([
+            'id' => ['required', function($attribute, $value, $fail) use($request) {
+                $venta = Venta::where('id', $value)
+                    ->where('fecha', $request->get('fecha'))
+                    ->where('total', $request->get('total'))
+                    ->first();
+
+                if(!$venta) return $fail('No se encontró la venta');
+
+                if($venta->estaFacturada()) 
+                    return $fail('La venta ya esta facturada');
+            }],
+            'fecha'=>'required',
+            'total'=>'required'
+        ]);
+
+        $venta = Venta::find($request->get('id'));
+        return redirect()->route('ventas.ver', $venta);
+    }
+
+    function facturar(Venta $venta, Request $request) {
+        $request->validate([
+            'nombre'=>['required', function($attribute, $value, $fail) 
+                use ($venta) {
+                    if($venta->estaFacturada()) 
+                        return $fail('Esta venta ya esta facturada');
+                }],
+            'rfc'=>'required',
+            'direccion'=>'required',
+            'codigopostal'=>'required',
+            'telefono'=>'required',
+            'email'=>'required']);
+
+        $venta->facturar($request->all());
+        return redirect()->route('ventas.ver', $venta);
+    }
+
+    function factura(Venta $venta) {
+        $factura = $venta->factura;
+        return view("ventas.factura", compact('venta', 'factura'));
     }
 }
