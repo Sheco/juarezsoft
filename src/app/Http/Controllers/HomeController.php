@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user()->hasRole('vendedor'))
-            return redirect()->route('puntodeventa');
+            return redirect()->route('puntodeventa.index');
         $inventario = Venta::reporteInventario();
         return view('home', compact('inventario'));
     }
