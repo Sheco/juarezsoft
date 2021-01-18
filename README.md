@@ -5,7 +5,7 @@ El Ingeniero tiene varias tiendas, distribuidas a lo largo de México.
 
 ## Características técnicas:
 - Cada tienda tiene que poder operar de manera local, sin depender de un enlace a Internet.
-- El dueño podrá conectarse por VPN, para tener una acceso seguro al sistema.
+- El dueño podrá conectarse por VPN, para tener un acceso seguro al sistema.
 
 # Requerimientos e instalación
 
