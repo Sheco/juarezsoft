@@ -60,13 +60,7 @@ Dependiendo de cómo se haya publicado la aplicación web, ahora ya podremos ent
 
 ## Instalación usando Docker
 
-Para una manera mucho mas sencilla de tener la aplicación corriendo, podemos usar Docker, para esto lo unico que necesitamos es seguir los siguientes pasos:
-
-1. Copiar `src/.env.example` a `src/.env`
-2. Correr `docker-compose up -d` (Es necesario haber instalado Docker y docker-compose previamente)
-3. Correr `./init.sh`
-
-La instalación de las dependencias y la preparación inicial de la aplicación se realizan automaticamente por Docker, el tercer paso es necesario para inicializar la base de datos y cargarle la configuración de fabrica.
+Para una manera mucho mas sencilla de tener la aplicación corriendo, podemos usar Docker, para esto lo unico que necesitamos es correr el script `init-docker.sh`, en un equipo que tenga instalado Docker y docker-compose.
 
 Este entorno de Docker incluye la apliación corriendo con PHP-FPM y un webserver nginx que sirve tanto los recursos estaticos así tambien actua como proxy reverso para acceder a los endpoints PHP.
 
