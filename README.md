@@ -239,10 +239,6 @@ Cada rol tiene definido el sueldo que el usuario percibe.
 
 El módulo de usuarios muestra la lista de usuarios registrados en el sistema, ofreciendo la capacidad de administrarlos, ya se creando usuarios, editandolos o incluso borrandolos.
 
-### Nómina
-
-Este modulo calcula el tabulador de nómina tomando en cuenta el rol de cada empleado, y las ventas realizadas en el periodo para determinar su percepción total.
-
 ### Productos
 
 Este modulo permite administrar el catalogo de productos que estaran disponibles en la aplicación.
@@ -269,6 +265,26 @@ En cada paso se registra la fecha en la que se cambia el estado, para efectos de
 Cuando se usa el punto de venta y se efectua exitosamenta venta, se hace disponible la información de facturación, tanto en pantalla como tambien en el ticket impreso, el cliente podra acudir a una terminal de facturación para proporcionar estos datos y solicitar una factura.
 
 Tras ingresar el numero de operación, la fecha y el monto total de la misma, el usuario tendrá la oportunidad de ingresar sus datos fiscales, con los cuales se generara la factura.
+
+## Detalle de los reportes
+
+### Nómina
+
+Este modulo calcula el tabulador de nómina tomando en cuenta el rol de cada empleado, y las ventas realizadas en el periodo para determinar su percepción total.
+
+### Ventas díarias
+
+Este reporte muestra una grafica de comportamiento con un resultado agregado de total de cada día en un rango de fechas especifico.
+
+Aquí se pueden ver las tendencias de fines de semana así como tambien los días con ventas especiales.
+
+### Ventas por producto
+
+Cuando se necesite ver un detalle de comportamiento por producto se podra usar este reporte el cual permite especificar un rango de fechas, un producto especifico y un metodo de ordenación con el cual se mostrara el resultado.
+
+### Ventas por vendedor
+
+Por el otro lado, tambien se puede obtener un reporte que resume el total de las ventas que realizo un vendedor en un rango de fechas especifico.
 
 
 
