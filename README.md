@@ -86,7 +86,7 @@ Este entorno de Docker incluye la apliación corriendo con PHP-FPM y un webserve
     - id
     - nombre
     - codigo
-    - departamento_id
+    - departamento_id (Referencia a departamentos.id)
     - precio
     - stock
 
@@ -96,13 +96,13 @@ Este entorno de Docker incluye la apliación corriendo con PHP-FPM y un webserve
 
 - proveedor_productos
     - id
-    - producto_id
+    - producto_id (Referencia a productos.id)
     - precio
 
 - solicitudes_compra
     - id
-    - proveedor_id
-    - producto_id
+    - proveedor_id (Referencia a proveedores.id)
+    - producto_id (Referencia a productos.id)
     - cantidad
     - status (nueva, pagada, entregada, cancelada)
     - fecha_solicitud
@@ -111,16 +111,18 @@ Este entorno de Docker incluye la apliación corriendo con PHP-FPM y un webserve
 
 - ventas
     - id
-    - usr_id
+    - usr_id (Referencia a users.id)
     - fecha
 
 - venta_productos
-    - producto_id
+    - venta_id (Referencia a ventas.id)
+    - producto_id (Referencia a productos.id)
     - cantidad
+    - precio
 
 - facturas
     - id
-    - venta_id
+    - venta_id (Referencia a ventas.id)
     - status (normal, cancelada)
     - rfc
     - nombre
@@ -205,12 +207,12 @@ tendrá bajo un menú contextual, una lista de módulos administrativos.
 Se pueden encontrar los siguientes módulos administrativos:
 
 Módulos de gestion de catalogos:
-- Roles
 - Usuarios
 - Departamentos
 - Productos
 - Proveedores
 - Solicitudes de compra
+- Facturación
 
 Modulos especiales:
 - Generación de ventas aleatorias
@@ -222,4 +224,73 @@ Reportes:
 - Nomina
 - Inventario
 - Cuentas por pagar
+
+## Detalle de los módulos de administración
+
+### Roles
+
+El módulo de roles muestra la lista de roles registrados en el sistema, los roles definen las tareas que un usuario tiene disponibles, limitando la funcionalidad de la aplicación.
+
+Los roles predeterminados son: Administrador, Gerente, Subgerente, Jéfe de piso y Vendedor. 
+
+Cada rol tiene definido el sueldo que el usuario percibe.
+
+### Usuarios
+
+El módulo de usuarios muestra la lista de usuarios registrados en el sistema, ofreciendo la capacidad de administrarlos, ya se creando usuarios, editandolos o incluso borrandolos.
+
+### Productos
+
+Este modulo permite administrar el catalogo de productos que estaran disponibles en la aplicación.
+
+Esto incluye la asignación de nombre, código y precio de lista.
+
+Por igual aquí mismo se puede controlar el abasto de cada producto, iniciando el proceso de solicitud de compra. Esto se hace teniendo disponible una lista de proveedores que venden el producto así como el precio al que venden dicho producto, lo cual es útil para darle seguimiento al margen de utilidad.
+
+Adicionalmente tambien se muestra una grafica de comportamiento que muestra la cantidad y el monto total que se ha vendido por cada uno de los productos.
+
+### Solicitudes de compra
+
+Es aquí donde se le da seguimiento a las solicitudes de compra de productos, este modulo permite controlar a un nivel controlado dicho proceso, pues cada solicitud puede tener varios estados, como:
+
+- Nueva: Una solicitud de compra nueva es aquella que se acaba de generar, pendiente de que sea pagada.
+- Pagada: Una vez que el departamento interno realice el pago al proveedor, pendiente de que sea surtida.
+- Surtida: El proveedor ya ha entregado el producto, terminando el proceso.
+- Cancelada: Si por algún motivo la solicitud es inválida, esta sera marcada como cancelada.
+
+En cada paso se registra la fecha en la que se cambia el estado, para efectos de seguimiento.
+
+### Facturación
+
+Cuando se usa el punto de venta y se efectua exitosamenta venta, se hace disponible la información de facturación, tanto en pantalla como tambien en el ticket impreso, el cliente podra acudir a una terminal de facturación para proporcionar estos datos y solicitar una factura.
+
+Tras ingresar el numero de operación, la fecha y el monto total de la misma, el usuario tendrá la oportunidad de ingresar sus datos fiscales, con los cuales se generara la factura.
+
+## Detalle de los reportes
+
+### Nómina
+
+Este modulo calcula el tabulador de nómina tomando en cuenta el rol de cada empleado, y las ventas realizadas en el periodo para determinar su percepción total.
+
+### Ventas díarias
+
+Este reporte muestra una grafica de comportamiento con un resultado agregado de total de cada día en un rango de fechas especifico.
+
+Aquí se pueden ver las tendencias de fines de semana así como tambien los días con ventas especiales.
+
+### Ventas por producto
+
+Cuando se necesite ver un detalle de comportamiento por producto se podra usar este reporte el cual permite especificar un rango de fechas, un producto especifico y un metodo de ordenación con el cual se mostrara el resultado.
+
+### Ventas por vendedor
+
+Por el otro lado, tambien se puede obtener un reporte que resume el total de las ventas que realizo un vendedor en un rango de fechas especifico.
+
+
+
+
+
+
+
+
 
